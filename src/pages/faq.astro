@@ -1,0 +1,28 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { faqItems } from "../data/faq";
+---
+
+<BaseLayout
+  title="Questions fréquentes"
+  description="Retrouvez les réponses aux questions fréquentes concernant nos pommes d'amour et vos commandes."
+>
+  <main>
+    <h1>Questions fréquentes</h1>
+
+    {
+      faqItems.length > 0 ? (
+        <div>
+          {faqItems.map((item) => (
+            <section>
+              <h2>{item.question}</h2>
+              <p>{item.answer}</p>
+            </section>
+          ))}
+        </div>
+      ) : (
+        <p>Les réponses aux questions fréquentes seront bientôt disponibles.</p>
+      )
+    }
+  </main>
+</BaseLayout>

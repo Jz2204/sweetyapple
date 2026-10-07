@@ -1,37 +1,26 @@
 ---
-import "../styles/global.css";
+import BaseLayout from "../layouts/BaseLayout.astro";
 ---
 
-<html lang="fr">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width" />
-    <title>Pommes d'amour à Bruxelles</title>
-  </head>
+<BaseLayout
+  title="Pommes d'amour gourmandes à Bruxelles"
+  description="Découvrez nos pommes d'amour gourmandes à Bruxelles et leurs différentes saveurs."
+>
+  <main>
+    <section>
+      <h1>Pommes d'amour gourmandes à Bruxelles</h1>
 
-  <body class="bg-stone-100 text-stone-900">
-    <main class="min-h-screen flex items-center justify-center px-6">
-      <div class="max-w-3xl">
-        <p class="mb-4 text-sm font-semibold uppercase tracking-[0.25em]">
-          Bruxelles
-        </p>
+      <p>
+        Découvrez nos créations et leurs différentes saveurs.
+      </p>
 
-        <h1 class="text-5xl font-bold tracking-tight md:text-7xl">
-          Pommes d'amour gourmandes.
-        </h1>
+      <a href="/saveurs/">
+        Découvrir les saveurs
+      </a>
 
-        <p class="mt-6 max-w-xl text-lg leading-8 text-stone-600">
-          Des créations généreuses, croquantes et ultra gourmandes,
-          disponibles en plusieurs saveurs.
-        </p>
-
-        <a
-          href="#"
-          class="mt-8 inline-block rounded-full bg-stone-900 px-6 py-3 font-medium text-white"
-        >
-          Découvrir les saveurs
-        </a>
-      </div>
-    </main>
-  </body>
-</html>
+      <a href="/commander/">
+        Commander
+      </a>
+    </section>
+  </main>
+</BaseLayout>

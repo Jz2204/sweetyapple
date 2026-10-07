@@ -1,0 +1,32 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { flavours } from "../data/flavours";
+---
+
+<BaseLayout
+  title="Nos saveurs de pommes d'amour"
+  description="Découvrez les différentes saveurs de pommes d'amour disponibles."
+>
+  <main>
+    <h1>Nos saveurs de pommes d'amour</h1>
+
+    {
+      flavours.length > 0 ? (
+        <ul>
+          {flavours.map((flavour) => (
+            <li>
+              <h2>{flavour.name}</h2>
+              <p>{flavour.shortDescription}</p>
+            </li>
+          ))}
+        </ul>
+      ) : (
+        <p>Nos saveurs seront bientôt disponibles ici.</p>
+      )
+    }
+
+    <a href="/commander/">
+      Commander
+    </a>
+  </main>
+</BaseLayout>
