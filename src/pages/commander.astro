@@ -1,16 +1,123 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
+import {
+  orderingRules,
+  appleOrderRules,
+} from "../data/ordering";
 ---
 
 <BaseLayout
-  title="Commander des pommes d'amour à Bruxelles"
-  description="Découvrez comment commander nos pommes d'amour à Bruxelles."
+  title="Commander des pommes d'amour à Bruxelles | Sweety Apple"
+  description="Découvrez comment commander chez Sweety Apple, les délais, conditions de retrait, livraison et moyens de paiement à Bruxelles."
 >
   <main>
-    <h1>Commander des pommes d'amour à Bruxelles</h1>
+    <header>
+      <h1>Commander chez Sweety Apple</h1>
 
-    <p>
-      Les informations de commande seront bientôt disponibles.
-    </p>
+      <p>
+        Retrouvez ici les principales informations pour préparer votre commande.
+      </p>
+    </header>
+
+    <section>
+      <h2>Délais de commande</h2>
+
+      <p>
+        Les commandes classiques doivent être passées
+        {" "}
+        {orderingRules.notice.standardOrderDays.min}
+        {" "}
+        à
+        {" "}
+        {orderingRules.notice.standardOrderDays.max}
+        {" "}
+        jours à l'avance.
+      </p>
+    </section>
+
+    <section>
+      <h2>Choisir plusieurs saveurs</h2>
+
+      <p>
+        Une seule saveur peut être commandée sans minimum particulier.
+      </p>
+
+      <p>
+        À partir de deux saveurs, prévoyez au minimum
+        {" "}
+        {appleOrderRules.twoOrMoreFlavours.minimumPerFlavour}
+        {" "}
+        pommes par saveur.
+      </p>
+
+      <p>
+        Le nombre maximum de saveurs dans une commande est de
+        {" "}
+        {appleOrderRules.maximumFlavours}.
+      </p>
+    </section>
+
+    <section>
+      <h2>Retrait</h2>
+
+      <p>{orderingRules.pickup.locationDescription}</p>
+
+      <ul>
+        {
+          orderingRules.pickup.timeSlots.map((slot) => (
+            <li>
+              {slot.start} – {slot.end}
+            </li>
+          ))
+        }
+      </ul>
+    </section>
+
+    <section>
+      <h2>Livraison</h2>
+
+      <p>
+        La livraison est possible selon le jour et l'heure.
+        Un minimum de
+        {" "}
+        {orderingRules.delivery.minimumProducts}
+        {" "}
+        produits est requis.
+      </p>
+
+      <p>
+        Le tarif dépend de la distance.
+      </p>
+    </section>
+
+    <section>
+      <h2>Paiement</h2>
+
+      <p>
+        Un acompte par {orderingRules.payment.depositMethod.toLowerCase()}
+        {" "}
+        est obligatoire pour confirmer la commande.
+      </p>
+
+      <p>
+        Le solde peut être payé par virement avant réception ou en espèces.
+      </p>
+    </section>
+
+    <section>
+      <h2>Modification et annulation</h2>
+
+      <p>
+        Une modification est possible jusqu'à
+        {" "}
+        {orderingRules.modifications.allowedUntilHoursBefore}
+        {" "}
+        heures avant la commande.
+      </p>
+
+      <p>
+        En cas d'annulation, l'acompte n'est pas remboursé.
+      </p>
+    </section>
   </main>
 </BaseLayout>

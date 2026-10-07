@@ -1,7 +1,12 @@
 export const siteConfig = {
+  siteName: "Sweety Apple",
   locale: "fr-BE",
   ogLocale: "fr_BE",
-  defaultTitle: "Pommes d'amour à Bruxelles",
+
+  defaultTitle: "Sweety Apple | Pommes d'amour à Bruxelles",
+
   defaultDescription:
-    "Découvrez des pommes d'amour gourmandes à Bruxelles, disponibles en plusieurs saveurs.",
+    "Découvrez les pommes d'amour, fruits gourmands et créations chocolatées de Sweety Apple à Bruxelles.",
+
+  defaultSocialImage: "/og-default.jpg",
 } as const;

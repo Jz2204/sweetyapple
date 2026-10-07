@@ -1,8 +1,9 @@
 export const business = {
-  name: null as string | null,
+  name: "Sweety Apple",
 
   location: {
     city: "Bruxelles",
+    pickupArea: "Molenbeek-Saint-Jean, entre Simonis et Belgica",
     country: "Belgique",
     countryCode: "BE",
   },
@@ -19,8 +20,17 @@ export const business = {
   },
 
   ordering: {
-    method: null as string | null,
-    pickupAvailable: null as boolean | null,
-    deliveryAvailable: null as boolean | null,
+    standardNoticeDays: {
+      min: 3,
+      max: 4,
+    },
+
+    eventNoticeWeeks: {
+      min: 2,
+      max: 3,
+    },
+
+    pickupAvailable: true,
+    deliveryAvailable: true,
   },
 } as const;

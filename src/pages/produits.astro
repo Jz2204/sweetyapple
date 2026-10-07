@@ -1,0 +1,71 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { products } from "../data/products";
+
+const categories = [
+  {
+    key: "fruit-caramel",
+    title: "Fruits d'amour",
+  },
+  {
+    key: "chocolat",
+    title: "Créations chocolatées",
+  },
+  {
+    key: "confiserie",
+    title: "Confiseries",
+  },
+] as const;
+---
+
+<BaseLayout
+  title="Nos produits gourmands à Bruxelles | Sweety Apple"
+  description="Découvrez les pommes d'amour, raisins d'amour, fraises, créations chocolatées et confiseries proposées par Sweety Apple à Bruxelles."
+>
+  <main>
+    <header>
+      <h1>Nos produits gourmands</h1>
+
+      <p>
+        Découvrez les différentes créations proposées par Sweety Apple à Bruxelles.
+      </p>
+    </header>
+
+    {
+      categories.map((category) => {
+        const categoryProducts = products.filter(
+          (product) => product.category === category.key
+        );
+
+        return (
+          <section>
+            <h2>{category.title}</h2>
+
+            <ul>
+              {categoryProducts.map((product) => (
+                <li>
+                  <h3>{product.name}</h3>
+
+                  {product.description && (
+                    <p>{product.description}</p>
+                  )}
+
+                  {product.priceFrom !== undefined && (
+                    <p>
+                      À partir de {product.priceFrom.toFixed(2)} €
+                      {product.unit ? ` — ${product.unit}` : ""}
+                    </p>
+                  )}
+                </li>
+              ))}
+            </ul>
+          </section>
+        );
+      })
+    }
+
+    <a href="/commander/">
+      Commander
+    </a>
+  </main>
+</BaseLayout>

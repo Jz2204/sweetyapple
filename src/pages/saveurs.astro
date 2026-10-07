@@ -1,29 +1,73 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
-import { flavours } from "../data/flavours";
+import { appleFlavours, flavourOptions } from "../data/flavours";
+
+const acidicFlavours = appleFlavours.filter(
+  (flavour) => flavour.acidic
+);
+
+const nonAcidicFlavours = appleFlavours.filter(
+  (flavour) => !flavour.acidic
+);
 ---
 
 <BaseLayout
-  title="Nos saveurs de pommes d'amour"
-  description="Découvrez les différentes saveurs de pommes d'amour disponibles."
+  title="Saveurs de pommes d'amour à Bruxelles | Sweety Apple"
+  description="Découvrez toutes les saveurs de pommes d'amour Sweety Apple à Bruxelles, acidulées ou non acidulées, avec des prix de 5 € à 8,50 €."
 >
   <main>
-    <h1>Nos saveurs de pommes d'amour</h1>
+    <header>
+      <h1>Nos saveurs de pommes d'amour</h1>
 
-    {
-      flavours.length > 0 ? (
-        <ul>
-          {flavours.map((flavour) => (
+      <p>
+        Découvrez nos différentes saveurs, acidulées ou non acidulées.
+      </p>
+    </header>
+
+    <section>
+      <h2>Saveurs acidulées</h2>
+
+      <ul>
+        {
+          acidicFlavours.map((flavour) => (
             <li>
-              <h2>{flavour.name}</h2>
-              <p>{flavour.shortDescription}</p>
+              <h3>
+                {flavour.name}
+                {flavour.isNew ? " — Nouveau" : ""}
+              </h3>
+
+              <p>{flavour.price.toFixed(2)} €</p>
             </li>
-          ))}
-        </ul>
-      ) : (
-        <p>Nos saveurs seront bientôt disponibles ici.</p>
-      )
-    }
+          ))
+        }
+      </ul>
+
+      <p>
+        Option sans acidulé :
+        {" "}
+        {flavourOptions.removeAcidicCoating.priceAdjustment.toFixed(2)} €.
+      </p>
+    </section>
+
+    <section>
+      <h2>Saveurs non acidulées</h2>
+
+      <ul>
+        {
+          nonAcidicFlavours.map((flavour) => (
+            <li>
+              <h3>{flavour.name}</h3>
+              <p>{flavour.price.toFixed(2)} €</p>
+            </li>
+          ))
+        }
+      </ul>
+
+      <p>
+        Option acidulée :
+        +{flavourOptions.addAcidicCoating.priceAdjustment.toFixed(2)} €.
+      </p>
+    </section>
 
     <a href="/commander/">
       Commander

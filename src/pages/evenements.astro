@@ -1,20 +1,109 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
+import {
+  orderingRules,
+  eventRules,
+  miniAppleEventRules,
+  sourLollipopEventPricing,
+} from "../data/ordering";
 ---
 
 <BaseLayout
-  title="Pommes d'amour pour vos événements à Bruxelles"
-  description="Découvrez nos pommes d'amour pour vos événements à Bruxelles."
+  title="Pommes d'amour pour événements à Bruxelles | Sweety Apple"
+  description="Personnalisez vos pommes d'amour et douceurs Sweety Apple pour anniversaires et événements à Bruxelles."
 >
   <main>
-    <h1>Pommes d'amour pour vos événements à Bruxelles</h1>
+    <header>
+      <h1>Des créations gourmandes pour vos événements</h1>
 
-    <p>
-      Découvrez prochainement nos possibilités pour vos événements.
-    </p>
+      <p>
+        Sweety Apple propose des commandes personnalisables pour vos événements.
+      </p>
+    </header>
+
+    <section>
+      <h2>Produits disponibles</h2>
+
+      <ul>
+        {
+          eventRules.products.map((product) => (
+            <li>{product}</li>
+          ))
+        }
+      </ul>
+    </section>
+
+    <section>
+      <h2>Personnalisation</h2>
+
+      <p>
+        Les commandes peuvent être adaptées aux couleurs et au thème de votre événement.
+      </p>
+    </section>
+
+    <section>
+      <h2>Mini pommes d'amour</h2>
+
+      <p>
+        Les mini pommes d'amour sont réservées aux événements.
+        Minimum :
+        {" "}
+        {miniAppleEventRules.minimumQuantity}
+        {" "}
+        pièces.
+      </p>
+    </section>
+
+    <section>
+      <h2>Sucettes Sour++</h2>
+
+      <p>
+        Minimum :
+        {" "}
+        {sourLollipopEventPricing.minimumPerFlavour}
+        {" "}
+        pièces par saveur.
+      </p>
+
+      <p>
+        Prix :
+        {" "}
+        {sourLollipopEventPricing.standard.pricePerPiece.toFixed(2)}
+        {" "}
+        € par pièce.
+      </p>
+
+      <p>
+        À partir de
+        {" "}
+        {sourLollipopEventPricing.bulk.minimumQuantity}
+        {" "}
+        pièces :
+        {" "}
+        {sourLollipopEventPricing.bulk.pricePerPiece.toFixed(2)}
+        {" "}
+        € par pièce.
+      </p>
+    </section>
+
+    <section>
+      <h2>Quand commander ?</h2>
+
+      <p>
+        Prévoyez environ
+        {" "}
+        {orderingRules.notice.eventOrderWeeks.min}
+        {" "}
+        à
+        {" "}
+        {orderingRules.notice.eventOrderWeeks.max}
+        {" "}
+        semaines à l'avance.
+      </p>
+    </section>
 
     <a href="/commander/">
-      Nous contacter
+      Demander une commande
     </a>
   </main>
 </BaseLayout>
