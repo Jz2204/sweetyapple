@@ -1,16 +1,37 @@
 ---
+import "../styles/global.css";
 ---
 
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<link rel="icon" href="/favicon.ico" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
-	</head>
-	<body>
-		<h1>Astro</h1>
-	</body>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>Pommes d'amour à Bruxelles</title>
+  </head>
+
+  <body class="bg-stone-100 text-stone-900">
+    <main class="min-h-screen flex items-center justify-center px-6">
+      <div class="max-w-3xl">
+        <p class="mb-4 text-sm font-semibold uppercase tracking-[0.25em]">
+          Bruxelles
+        </p>
+
+        <h1 class="text-5xl font-bold tracking-tight md:text-7xl">
+          Pommes d'amour gourmandes.
+        </h1>
+
+        <p class="mt-6 max-w-xl text-lg leading-8 text-stone-600">
+          Des créations généreuses, croquantes et ultra gourmandes,
+          disponibles en plusieurs saveurs.
+        </p>
+
+        <a
+          href="#"
+          class="mt-8 inline-block rounded-full bg-stone-900 px-6 py-3 font-medium text-white"
+        >
+          Découvrir les saveurs
+        </a>
+      </div>
+    </main>
+  </body>
 </html>
