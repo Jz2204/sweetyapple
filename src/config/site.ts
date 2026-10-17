@@ -8,7 +8,7 @@ export const siteConfig = {
   defaultDescription:
     "Découvrez les pommes d'amour, fruits gourmands et créations chocolatées de Sweety Apple à Bruxelles.",
 
-  defaultSocialImage: "/og-default.jpg",
+  defaultSocialImage: "/og-default.png",
 
   instagram: {
     handle: "@sweety.apple_brussels",
