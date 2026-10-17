@@ -1,32 +1,204 @@
 ---
 import { business } from "../../data/business";
+import { siteConfig } from "../../config/site";
 
 const currentYear = new Date().getFullYear();
 ---
 
-<footer>
-  <div>
-    <p>
-      <strong>{business.name}</strong>
-    </p>
+<footer class="bg-sweety-brown text-sweety-cream">
 
-    <p>
-      {business.location.city}, {business.location.country}
-    </p>
+  <!-- INSTAGRAM CTA -->
+  <section
+    aria-labelledby="footer-contact-title"
+    class="border-b border-sweety-cream/15 px-6 py-14 sm:px-10 sm:py-16 lg:px-12"
+  >
+    <div
+      class="mx-auto flex max-w-6xl flex-col gap-8 md:flex-row md:items-center md:justify-between"
+    >
+      <div>
+        <p
+          class="mb-3 text-xs font-semibold uppercase tracking-[0.16em] text-[#FFB4AE]"
+        >
+          Instagram
+        </p>
+
+        <h2
+          id="footer-contact-title"
+          class="max-w-xl font-display text-3xl leading-tight text-sweety-cream sm:text-4xl"
+        >
+          Une question ou une commande ?
+        </h2>
+
+        <p
+          class="mt-4 max-w-xl text-sm leading-7 text-sweety-cream/70 sm:text-base"
+        >
+          Envoyez directement un message à Sweety Apple sur Instagram.
+        </p>
+      </div>
+
+      <a
+        href={siteConfig.instagram.url}
+        target="_blank"
+        rel="noopener noreferrer"
+        aria-label={`Contacter ${business.name} sur Instagram`}
+        class="inline-flex min-h-12 shrink-0 items-center justify-center gap-3 rounded-full bg-sweety-red px-7 py-3 text-sm font-semibold text-white transition-colors hover:bg-white hover:text-sweety-brown focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white"
+      >
+        Écrire sur Instagram
+
+        <svg
+          viewBox="0 0 16 16"
+          fill="none"
+          aria-hidden="true"
+          class="h-4 w-4"
+        >
+          <path
+            d="M4.25 11.75 11.75 4.25M6 4.25h5.75V10"
+            stroke="currentColor"
+            stroke-width="1.5"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          />
+        </svg>
+      </a>
+    </div>
+  </section>
+
+  <!-- MAIN FOOTER -->
+  <div class="px-6 py-12 sm:px-10 sm:py-14 lg:px-12">
+    <div
+      class="mx-auto grid max-w-6xl gap-12 sm:grid-cols-2 lg:grid-cols-[1.25fr_0.75fr_0.75fr]"
+    >
+
+      <!-- BRAND -->
+      <div>
+        <a
+          href="/"
+          class="font-display text-2xl font-semibold tracking-tight text-sweety-cream transition-opacity hover:opacity-75"
+        >
+          {business.name}
+        </a>
+
+        <p
+          class="mt-4 max-w-sm text-sm leading-7 text-sweety-cream/65"
+        >
+          Pommes d'amour, fruits gourmands, créations chocolatées
+          et confiseries à Bruxelles.
+        </p>
+
+        <a
+          href={siteConfig.instagram.url}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="mt-5 inline-flex items-center gap-2 text-sm font-semibold text-sweety-cream transition-colors hover:text-[#FFB4AE]"
+        >
+          {siteConfig.instagram.handle}
+
+          <svg
+            viewBox="0 0 16 16"
+            fill="none"
+            aria-hidden="true"
+            class="h-3.5 w-3.5"
+          >
+            <path
+              d="M4.25 11.75 11.75 4.25M6 4.25h5.75V10"
+              stroke="currentColor"
+              stroke-width="1.5"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            />
+          </svg>
+        </a>
+      </div>
+
+      <!-- NAVIGATION -->
+      <nav aria-label="Navigation de pied de page">
+        <p
+          class="mb-4 text-xs font-semibold uppercase tracking-[0.15em] text-sweety-cream/45"
+        >
+          Navigation
+        </p>
+
+        <ul class="space-y-3 text-sm">
+          <li>
+            <a
+              href="/produits/"
+              class="text-sweety-cream/75 transition-colors hover:text-white"
+            >
+              Produits
+            </a>
+          </li>
+
+          <li>
+            <a
+              href="/saveurs/"
+              class="text-sweety-cream/75 transition-colors hover:text-white"
+            >
+              Saveurs
+            </a>
+          </li>
+
+          <li>
+            <a
+              href="/commander/"
+              class="text-sweety-cream/75 transition-colors hover:text-white"
+            >
+              Commander
+            </a>
+          </li>
+
+          <li>
+            <a
+              href="/evenements/"
+              class="text-sweety-cream/75 transition-colors hover:text-white"
+            >
+              Événements
+            </a>
+          </li>
+
+          <li>
+            <a
+              href="/faq/"
+              class="text-sweety-cream/75 transition-colors hover:text-white"
+            >
+              FAQ
+            </a>
+          </li>
+        </ul>
+      </nav>
+
+      <!-- LOCATION -->
+      <div>
+        <p
+          class="mb-4 text-xs font-semibold uppercase tracking-[0.15em] text-sweety-cream/45"
+        >
+          Retrait
+        </p>
+
+        <p class="text-sm leading-7 text-sweety-cream/75">
+          {business.location.city}<br />
+          {business.location.country}
+        </p>
+
+        <p
+          class="mt-4 text-sm leading-7 text-sweety-cream/55"
+        >
+          Entre Simonis et Belgica.
+        </p>
+      </div>
+
+    </div>
+
+    <!-- BOTTOM -->
+    <div
+      class="mx-auto mt-12 flex max-w-6xl flex-col gap-3 border-t border-sweety-cream/15 pt-6 text-xs text-sweety-cream/45 sm:flex-row sm:items-center sm:justify-between"
+    >
+      <p>
+        © {currentYear} {business.name}. Tous droits réservés.
+      </p>
+
+      <p>
+        Bruxelles, Belgique
+      </p>
+    </div>
   </div>
-
-  <nav aria-label="Navigation de pied de page">
-    <ul>
-      <li><a href="/produits/">Produits</a></li>
-      <li><a href="/saveurs/">Saveurs</a></li>
-      <li><a href="/commander/">Commander</a></li>
-      <li><a href="/evenements/">Événements</a></li>
-      <li><a href="/a-propos/">À propos</a></li>
-      <li><a href="/faq/">FAQ</a></li>
-    </ul>
-  </nav>
-
-  <p>
-    © {currentYear} {business.name}. Tous droits réservés.
-  </p>
 </footer>

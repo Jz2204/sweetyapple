@@ -1,76 +1,331 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
+import { Image } from "astro:assets";
+import { siteConfig } from "../config/site";
+
+import saveursImage from "../assets/images/saveurs.png";
+
 import { appleFlavours, flavourOptions } from "../data/flavours";
+import { orderingRules } from "../data/ordering";
 
-const acidicFlavours = appleFlavours.filter(
-  (flavour) => flavour.acidic
-);
+const acidicFlavours = appleFlavours.filter((flavour) => flavour.acidic);
+const sweetFlavours = appleFlavours.filter((flavour) => !flavour.acidic);
 
-const nonAcidicFlavours = appleFlavours.filter(
-  (flavour) => !flavour.acidic
-);
+const formatPrice = (value: number) =>
+  new Intl.NumberFormat("fr-BE", {
+    style: "currency",
+    currency: "EUR",
+  }).format(value);
+
+const minPrice = Math.min(...appleFlavours.map((flavour) => flavour.price));
 ---
 
 <BaseLayout
-  title="Saveurs de pommes d'amour à Bruxelles | Sweety Apple"
-  description="Découvrez toutes les saveurs de pommes d'amour Sweety Apple à Bruxelles, acidulées ou non acidulées, avec des prix de 5 € à 8,50 €."
+  title="Nos 16 saveurs de pommes d'amour à Bruxelles | Sweety Apple"
+  description="Découvrez les 16 saveurs de pommes d'amour Sweety Apple à Bruxelles : acidulées ou non, de 5 € à 8,50 €. Prix, options et conditions de commande."
 >
-  <main>
-    <header>
-      <h1>Nos saveurs de pommes d'amour</h1>
+  <main class="bg-sweety-cream font-body text-sweety-brown">
 
-      <p>
-        Découvrez nos différentes saveurs, acidulées ou non acidulées.
-      </p>
-    </header>
+    <!-- INTRODUCTION -->
+    <section class="px-6 pb-14 pt-14 sm:px-10 sm:pb-20 sm:pt-20 lg:px-12">
+      <div
+        class="mx-auto grid max-w-6xl items-center gap-10 lg:grid-cols-[0.9fr_1.1fr] lg:gap-16"
+      >
+        <div class="max-w-2xl">
+          <p
+            class="mb-5 text-xs font-semibold uppercase tracking-[0.16em] text-sweety-red"
+          >
+            Sweety Apple · Bruxelles
+          </p>
 
-    <section>
-      <h2>Saveurs acidulées</h2>
+          <h1
+            class="max-w-[15ch] font-display text-[clamp(2.8rem,5vw,4.5rem)] leading-[1.06] tracking-tight"
+          >
+            Une saveur pour chaque envie.
+          </h1>
 
-      <ul>
-        {
-          acidicFlavours.map((flavour) => (
-            <li>
-              <h3>
-                {flavour.name}
-                {flavour.isNew ? " — Nouveau" : ""}
+          <p
+            class="mt-6 max-w-lg text-base leading-8 text-sweety-brown/80 sm:text-lg"
+          >
+            Découvrez nos {appleFlavours.length} saveurs de pommes d'amour :
+            des versions acidulées, des associations plus douces et
+            des prix à partir de {formatPrice(minPrice)}.
+          </p>
+
+          <div class="mt-8 flex flex-wrap gap-3">
+            <a
+              href="#liste-saveurs"
+              class="inline-flex min-h-12 items-center justify-center rounded-full bg-sweety-red px-7 py-3 text-sm font-semibold text-white transition-colors hover:bg-sweety-brown focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-sweety-red"
+            >
+              Voir les saveurs
+            </a>
+
+            <a
+              href="/commander/"
+              class="inline-flex min-h-12 items-center justify-center rounded-full border border-sweety-brown/30 px-7 py-3 text-sm font-semibold transition-colors hover:bg-white focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-sweety-brown"
+            >
+              Comment commander ?
+            </a>
+          </div>
+        </div>
+
+        <figure class="w-full lg:justify-self-end">
+          <div
+            class="aspect-[3/2] overflow-hidden rounded-[2rem] bg-[#F0E5DD]"
+          >
+            <Image
+              src={saveursImage}
+              alt="Assortiment de pommes d'amour Sweety Apple aux différentes couleurs et saveurs"
+              widths={[480, 768, 1024, 1400]}
+              sizes="(min-width: 1024px) 55vw, 100vw"
+              format="webp"
+              quality={82}
+              loading="eager"
+              class="block h-full w-full object-cover"
+            />
+          </div>
+
+          <figcaption
+            class="mt-3 text-xs leading-5 text-sweety-brown/65"
+          >
+            Quelques-unes des créations Sweety Apple.
+          </figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <!-- FLAVOUR LIST -->
+    <section
+      id="liste-saveurs"
+      aria-labelledby="flavours-heading"
+      class="scroll-mt-24 border-t border-sweety-brown/15 px-6 py-16 sm:px-10 sm:py-20 lg:px-12"
+    >
+      <div class="mx-auto max-w-6xl">
+
+        <div class="mb-10 max-w-2xl">
+          <p
+            class="mb-3 text-xs font-semibold uppercase tracking-[0.16em] text-sweety-red"
+          >
+            La carte des saveurs
+          </p>
+
+          <h2
+            id="flavours-heading"
+            class="font-display text-3xl leading-tight sm:text-4xl"
+          >
+            Faites votre choix.
+          </h2>
+
+          <p
+            class="mt-4 text-sm leading-7 text-sweety-brown/75 sm:text-base"
+          >
+            Tous les prix indiqués sont par pomme, avant modification
+            éventuelle de l'option acidulée.
+          </p>
+        </div>
+
+        <div class="grid gap-12 lg:grid-cols-2 lg:gap-16">
+
+          <!-- ACIDULÉES -->
+          <div aria-labelledby="acidic-title">
+            <div
+              class="flex items-baseline justify-between gap-4 border-b border-sweety-brown/35 pb-5"
+            >
+              <h3
+                id="acidic-title"
+                class="font-display text-2xl sm:text-3xl"
+              >
+                Les acidulées
               </h3>
 
-              <p>{flavour.price.toFixed(2)} €</p>
-            </li>
-          ))
-        }
-      </ul>
+              <span
+                class="text-xs font-medium text-sweety-brown/60"
+              >
+                {acidicFlavours.length} saveurs
+              </span>
+            </div>
 
-      <p>
-        Option sans acidulé :
-        {" "}
-        {flavourOptions.removeAcidicCoating.priceAdjustment.toFixed(2)} €.
-      </p>
+            <ul>
+              {
+                acidicFlavours.map((flavour) => (
+                  <li
+                    class="flex min-h-16 items-center justify-between gap-5 border-b border-sweety-brown/15 py-4"
+                  >
+                    <div class="min-w-0">
+                      <p class="font-medium leading-6">
+                        {flavour.name}
+
+                        {flavour.isNew && (
+                          <span
+                            class="ml-2 inline-block align-middle text-[10px] font-bold uppercase tracking-wider text-sweety-red"
+                          >
+                            Nouveau
+                          </span>
+                        )}
+                      </p>
+                    </div>
+
+                    <span
+                      class="shrink-0 font-semibold tabular-nums"
+                    >
+                      {formatPrice(flavour.price)}
+                    </span>
+                  </li>
+                ))
+              }
+            </ul>
+
+            <p
+              class="mt-5 border-l-2 border-sweety-red pl-4 text-sm leading-7 text-sweety-brown/80"
+            >
+              Vous préférez sans acidulé ? Retirez l'option pour
+              <strong class="font-semibold text-sweety-brown">
+                {" "}
+                {formatPrice(
+                  Math.abs(
+                    flavourOptions.removeAcidicCoating.priceAdjustment
+                  )
+                )} de moins
+              </strong>.
+            </p>
+          </div>
+
+          <!-- NON ACIDULÉES -->
+          <div aria-labelledby="soft-title">
+            <div
+              class="flex items-baseline justify-between gap-4 border-b border-sweety-brown/35 pb-5"
+            >
+              <h3
+                id="soft-title"
+                class="font-display text-2xl sm:text-3xl"
+              >
+                Les non acidulées
+              </h3>
+
+              <span
+                class="text-xs font-medium text-sweety-brown/60"
+              >
+                {sweetFlavours.length} saveurs
+              </span>
+            </div>
+
+            <ul>
+              {
+                sweetFlavours.map((flavour) => (
+                  <li
+                    class="flex min-h-16 items-center justify-between gap-5 border-b border-sweety-brown/15 py-4"
+                  >
+                    <p class="min-w-0 font-medium leading-6">
+                      {flavour.name}
+                    </p>
+
+                    <span
+                      class="shrink-0 font-semibold tabular-nums"
+                    >
+                      {formatPrice(flavour.price)}
+                    </span>
+                  </li>
+                ))
+              }
+            </ul>
+
+            <p
+              class="mt-5 border-l-2 border-sweety-red pl-4 text-sm leading-7 text-sweety-brown/80"
+            >
+              Vous aimez quand ça pique un peu ? Ajoutez l'option acidulée pour
+              <strong class="font-semibold text-sweety-brown">
+                {" "}
+                {formatPrice(
+                  flavourOptions.addAcidicCoating.priceAdjustment
+                )} de plus
+              </strong>.
+            </p>
+          </div>
+
+        </div>
+      </div>
     </section>
 
-    <section>
-      <h2>Saveurs non acidulées</h2>
+    <!-- ORDERING GUIDANCE -->
+    <section
+      class="bg-[#F1E4D8] px-6 py-14 sm:px-10 sm:py-16 lg:px-12"
+      aria-labelledby="order-guidance-title"
+    >
+      <div
+        class="mx-auto grid max-w-6xl items-start gap-8 md:grid-cols-2 md:gap-12"
+      >
+        <div>
+          <p
+            class="mb-3 text-xs font-semibold uppercase tracking-[0.16em] text-sweety-red"
+          >
+            Avant de commander
+          </p>
 
-      <ul>
-        {
-          nonAcidicFlavours.map((flavour) => (
-            <li>
-              <h3>{flavour.name}</h3>
-              <p>{flavour.price.toFixed(2)} €</p>
-            </li>
-          ))
-        }
-      </ul>
+          <h2
+            id="order-guidance-title"
+            class="max-w-md font-display text-3xl leading-tight sm:text-4xl"
+          >
+            Composez votre sélection.
+          </h2>
 
-      <p>
-        Option acidulée :
-        +{flavourOptions.addAcidicCoating.priceAdjustment.toFixed(2)} €.
-      </p>
+          <p
+            class="mt-4 max-w-md text-sm leading-7 text-sweety-brown/80 sm:text-base"
+          >
+            Les quantités minimales dépendent du nombre de saveurs choisies.
+            Vous pouvez sélectionner jusqu'à cinq saveurs par commande.
+          </p>
+        </div>
+
+        <div>
+          <p
+            class="text-sm leading-7 text-sweety-brown/85"
+          >
+            Pensez à commander
+            {" "}
+            {orderingRules.notice.standardOrderDays.min}
+            {" à "}
+            {orderingRules.notice.standardOrderDays.max}
+            {" "}
+            jours à l'avance. Le retrait se fait à Molenbeek-Saint-Jean ;
+            la livraison dépend des disponibilités.
+          </p>
+
+          <div class="mt-6 flex flex-wrap gap-3">
+            <a
+              href="/commander/"
+              class="inline-flex min-h-12 items-center justify-center rounded-full border border-sweety-brown/30 px-7 py-3 text-sm font-semibold transition-colors hover:bg-white focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-sweety-brown"
+            >
+              Voir les conditions
+            </a>
+
+            <a
+              href={siteConfig.instagram.url}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Commander chez Sweety Apple via Instagram"
+              class="inline-flex min-h-12 items-center justify-center gap-2 rounded-full bg-sweety-red px-7 py-3 text-sm font-semibold text-white transition-colors hover:bg-sweety-brown focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-sweety-red"
+            >
+              Commander
+
+              <svg
+                viewBox="0 0 16 16"
+                fill="none"
+                aria-hidden="true"
+                class="h-4 w-4"
+              >
+                <path
+                  d="M4.25 11.75 11.75 4.25M6 4.25h5.75V10"
+                  stroke="currentColor"
+                  stroke-width="1.5"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+              </svg>
+            </a>
+          </div>
+        </div>
+      </div>
     </section>
 
-    <a href="/commander/">
-      Commander
-    </a>
   </main>
 </BaseLayout>

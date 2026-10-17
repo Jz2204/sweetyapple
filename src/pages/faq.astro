@@ -4,25 +4,179 @@ import { faqItems } from "../data/faq";
 ---
 
 <BaseLayout
-  title="Questions fréquentes"
-  description="Retrouvez les réponses aux questions fréquentes concernant nos pommes d'amour et vos commandes."
+  title="FAQ | Questions fréquentes | Sweety Apple Bruxelles"
+  description="Retrouvez les réponses aux questions fréquentes sur les commandes Sweety Apple : délais, retrait, livraison, paiement, saveurs et événements à Bruxelles."
 >
-  <main>
-    <h1>Questions fréquentes</h1>
+  <main class="bg-sweety-cream font-body text-sweety-brown">
 
-    {
-      faqItems.length > 0 ? (
+    <!-- INTRO -->
+    <section class="px-6 pb-14 pt-14 sm:px-10 sm:pb-20 sm:pt-20 lg:px-12">
+      <div
+        class="mx-auto grid max-w-6xl gap-8 lg:grid-cols-[0.8fr_1.2fr] lg:items-end lg:gap-16"
+      >
         <div>
-          {faqItems.map((item) => (
-            <section>
-              <h2>{item.question}</h2>
-              <p>{item.answer}</p>
-            </section>
-          ))}
+          <p
+            class="mb-5 text-xs font-semibold uppercase tracking-[0.16em] text-sweety-red"
+          >
+            Besoin d'une réponse ?
+          </p>
+
+          <h1
+            class="max-w-[10ch] font-display text-[clamp(3rem,5vw,4.8rem)] leading-[1.04] tracking-tight"
+          >
+            Questions fréquentes.
+          </h1>
         </div>
-      ) : (
-        <p>Les réponses aux questions fréquentes seront bientôt disponibles.</p>
-      )
-    }
+
+        <div class="max-w-xl lg:justify-self-end">
+          <p
+            class="text-base leading-8 text-sweety-brown/80 sm:text-lg"
+          >
+            Commande, retrait, livraison, paiement ou événements :
+            retrouvez ici les réponses aux questions les plus courantes.
+          </p>
+
+          <p
+            class="mt-4 text-sm leading-7 text-sweety-brown/60"
+          >
+            Une information vous manque ? Consultez aussi notre page
+            consacrée aux conditions de commande.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- FAQ -->
+    <section
+      aria-labelledby="faq-list-title"
+      class="border-t border-sweety-brown/15 px-6 py-16 sm:px-10 sm:py-20 lg:px-12"
+    >
+      <div
+        class="mx-auto grid max-w-6xl gap-12 lg:grid-cols-[0.65fr_1.35fr] lg:gap-20"
+      >
+        <!-- Section title -->
+        <div>
+          <p
+            class="mb-3 text-xs font-semibold uppercase tracking-[0.16em] text-sweety-red"
+          >
+            Tout savoir
+          </p>
+
+          <h2
+            id="faq-list-title"
+            class="max-w-sm font-display text-3xl leading-tight sm:text-4xl"
+          >
+            Les réponses, simplement.
+          </h2>
+
+          <p
+            class="mt-5 max-w-sm text-sm leading-7 text-sweety-brown/70"
+          >
+            Cliquez sur une question pour afficher sa réponse.
+          </p>
+        </div>
+
+        <!-- Accordion -->
+        <div>
+          {
+            faqItems.length > 0 ? (
+              <div class="border-t border-sweety-brown/30">
+                {faqItems.map((item, index) => (
+                  <details
+                    class="group border-b border-sweety-brown/20"
+                  >
+                    <summary
+                      class="flex cursor-pointer list-none items-center justify-between gap-6 py-6 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-sweety-red [&::-webkit-details-marker]:hidden"
+                    >
+                      <div class="flex min-w-0 items-start gap-4 sm:gap-6">
+                        <span
+                          class="mt-1 shrink-0 text-[11px] font-semibold tabular-nums text-sweety-red"
+                          aria-hidden="true"
+                        >
+                          {String(index + 1).padStart(2, "0")}
+                        </span>
+
+                        <h3
+                          class="font-display text-xl leading-snug sm:text-2xl"
+                        >
+                          {item.question}
+                        </h3>
+                      </div>
+
+                      <span
+                        class="relative flex h-8 w-8 shrink-0 items-center justify-center rounded-full border border-sweety-brown/25 transition-colors group-open:bg-sweety-red group-open:text-white group-open:border-sweety-red"
+                        aria-hidden="true"
+                      >
+                        <span
+                          class="absolute h-px w-3 bg-current"
+                        ></span>
+
+                        <span
+                          class="absolute h-3 w-px bg-current transition-transform duration-200 group-open:rotate-90 group-open:opacity-0"
+                        ></span>
+                      </span>
+                    </summary>
+
+                    <div
+                      class="pb-7 pl-9 pr-10 sm:pl-[3.75rem] sm:pr-14"
+                    >
+                      <p
+                        class="max-w-2xl text-sm leading-7 text-sweety-brown/75 sm:text-base sm:leading-8"
+                      >
+                        {item.answer}
+                      </p>
+                    </div>
+                  </details>
+                ))}
+              </div>
+            ) : (
+              <p class="text-sm leading-7 text-sweety-brown/70">
+                Les réponses aux questions fréquentes seront bientôt disponibles.
+              </p>
+            )
+          }
+        </div>
+      </div>
+    </section>
+
+    <!-- HELP CTA -->
+    <section
+      aria-labelledby="faq-help-title"
+      class="bg-[#F1E4D8] px-6 py-14 sm:px-10 sm:py-16 lg:px-12"
+    >
+      <div
+        class="mx-auto flex max-w-6xl flex-col gap-8 md:flex-row md:items-center md:justify-between"
+      >
+        <div>
+          <p
+            class="mb-3 text-xs font-semibold uppercase tracking-[0.16em] text-sweety-red"
+          >
+            Votre commande
+          </p>
+
+          <h2
+            id="faq-help-title"
+            class="max-w-xl font-display text-3xl leading-tight sm:text-4xl"
+          >
+            Encore une question ?
+          </h2>
+
+          <p
+            class="mt-4 max-w-xl text-sm leading-7 text-sweety-brown/75 sm:text-base"
+          >
+            Retrouvez les délais, quantités, modalités de retrait,
+            livraison et paiement sur la page commande.
+          </p>
+        </div>
+
+        <a
+          href="/commander/"
+          class="inline-flex min-h-12 shrink-0 items-center justify-center rounded-full bg-sweety-red px-7 py-3 text-sm font-semibold text-white transition-colors hover:bg-sweety-brown focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-sweety-red"
+        >
+          Voir comment commander
+        </a>
+      </div>
+    </section>
+
   </main>
 </BaseLayout>

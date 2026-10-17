@@ -1,71 +1,425 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
+import { Image } from "astro:assets";
+import { siteConfig } from "../config/site";
+
+import fruitsAmourImage from "../assets/images/produits-fruits-amour.png";
+import chocolatImage from "../assets/images/produits-chocolat.png";
+import confiseriesImage from "../assets/images/produits-confiseries.png";
+
 import { products } from "../data/products";
 
-const categories = [
-  {
-    key: "fruit-caramel",
-    title: "Fruits d'amour",
-  },
-  {
-    key: "chocolat",
-    title: "Créations chocolatées",
-  },
-  {
-    key: "confiserie",
-    title: "Confiseries",
-  },
-] as const;
+const fruitProducts = products.filter(
+  (product) => product.category === "fruit-caramel"
+);
+
+const chocolateProducts = products.filter(
+  (product) => product.category === "chocolat"
+);
+
+const confectioneryProducts = products.filter(
+  (product) => product.category === "confiserie"
+);
+
+const formatPrice = (price: number) =>
+  new Intl.NumberFormat("fr-BE", {
+    style: "currency",
+    currency: "EUR",
+  }).format(price);
 ---
 
 <BaseLayout
   title="Nos produits gourmands à Bruxelles | Sweety Apple"
-  description="Découvrez les pommes d'amour, raisins d'amour, fraises, créations chocolatées et confiseries proposées par Sweety Apple à Bruxelles."
+  description="Découvrez les pommes d'amour, raisins, fraises au chocolat, créations Dubai et confiseries Sweety Apple à Bruxelles."
 >
-  <main>
-    <header>
-      <h1>Nos produits gourmands</h1>
+  <main class="bg-sweety-cream font-body text-sweety-brown">
 
-      <p>
-        Découvrez les différentes créations proposées par Sweety Apple à Bruxelles.
-      </p>
-    </header>
+    <!-- INTRO -->
+    <section
+      class="px-6 pb-16 pt-14 sm:px-10 sm:pb-20 sm:pt-20 lg:px-12"
+    >
+      <div
+        class="mx-auto grid max-w-6xl gap-12 lg:grid-cols-[0.85fr_1.15fr] lg:items-center lg:gap-16"
+      >
 
-    {
-      categories.map((category) => {
-        const categoryProducts = products.filter(
-          (product) => product.category === category.key
-        );
+        <!-- Intro text -->
+        <div>
+          <p
+            class="mb-5 text-xs font-semibold uppercase tracking-[0.16em] text-sweety-red"
+          >
+            La collection Sweety Apple
+          </p>
 
-        return (
-          <section>
-            <h2>{category.title}</h2>
+          <h1
+            class="max-w-[12ch] font-display text-[clamp(2.9rem,5vw,4.7rem)] leading-[1.05] tracking-tight"
+          >
+            Bien plus que des pommes d'amour.
+          </h1>
 
-            <ul>
-              {categoryProducts.map((product) => (
-                <li>
-                  <h3>{product.name}</h3>
+          <p
+            class="mt-6 max-w-lg text-base leading-8 text-sweety-brown/80 sm:text-lg"
+          >
+            Fruits d'amour, créations chocolatées et confiseries :
+            découvrez les différentes gourmandises Sweety Apple.
+          </p>
+
+          <a
+            href={siteConfig.instagram.url}
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="Commander chez Sweety Apple via Instagram"
+            class="mt-8 inline-flex min-h-12 items-center justify-center gap-2 rounded-full bg-sweety-red px-7 py-3 text-sm font-semibold text-white transition-colors hover:bg-sweety-brown focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-sweety-red"
+          >
+            Commander
+
+            <svg
+              viewBox="0 0 16 16"
+              fill="none"
+              aria-hidden="true"
+              class="h-4 w-4"
+            >
+              <path
+                d="M4.25 11.75 11.75 4.25M6 4.25h5.75V10"
+                stroke="currentColor"
+                stroke-width="1.5"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              />
+            </svg>
+          </a>
+        </div>
+
+        <!-- Product collage -->
+        <div
+          class="grid aspect-[4/3] grid-cols-[1.15fr_0.85fr] grid-rows-2 gap-3 sm:gap-4"
+        >
+          <!-- Fruits d'amour -->
+          <figure
+            class="row-span-2 overflow-hidden rounded-[1.5rem] bg-[#F0E5DD]"
+          >
+            <Image
+              src={fruitsAmourImage}
+              alt="Assortiment de fruits d'amour Sweety Apple avec pomme, kiwi et raisins"
+              widths={[400, 600, 800]}
+              sizes="(min-width: 1024px) 32vw, 55vw"
+              format="webp"
+              quality={82}
+              loading="eager"
+              class="h-full w-full object-cover"
+            />
+          </figure>
+
+          <!-- Chocolat -->
+          <figure
+            class="overflow-hidden rounded-[1.5rem] bg-[#F0E5DD]"
+          >
+            <Image
+              src={chocolatImage}
+              alt="Assortiment de créations chocolatées Sweety Apple"
+              widths={[320, 480, 640]}
+              sizes="(min-width: 1024px) 22vw, 45vw"
+              format="webp"
+              quality={82}
+              loading="eager"
+              class="h-full w-full object-cover"
+            />
+          </figure>
+
+          <!-- Confiseries -->
+          <figure
+            class="overflow-hidden rounded-[1.5rem] bg-[#F0E5DD]"
+          >
+            <Image
+              src={confiseriesImage}
+              alt="Sucettes Sour++ colorées Sweety Apple"
+              widths={[320, 480, 640]}
+              sizes="(min-width: 1024px) 22vw, 45vw"
+              format="webp"
+              quality={82}
+              loading="eager"
+              class="h-full w-full object-cover"
+            />
+          </figure>
+        </div>
+      </div>
+    </section>
+
+    <!-- CATALOGUE -->
+    <section
+      aria-labelledby="catalogue-title"
+      class="border-t border-sweety-brown/15 px-6 py-16 sm:px-10 sm:py-20 lg:px-12"
+    >
+      <div class="mx-auto max-w-6xl">
+
+        <div class="mb-14 max-w-2xl">
+          <p
+            class="mb-3 text-xs font-semibold uppercase tracking-[0.16em] text-sweety-red"
+          >
+            Nos gourmandises
+          </p>
+
+          <h2
+            id="catalogue-title"
+            class="font-display text-3xl leading-tight sm:text-4xl"
+          >
+            Explorez la collection.
+          </h2>
+
+          <p
+            class="mt-4 text-sm leading-7 text-sweety-brown/75 sm:text-base"
+          >
+            Retrouvez ici les produits et formats actuellement proposés
+            par Sweety Apple.
+          </p>
+        </div>
+
+        <!-- FRUITS D'AMOUR -->
+        <section aria-labelledby="fruits-title">
+          <div
+            class="flex items-end justify-between gap-6 border-b border-sweety-brown/35 pb-5"
+          >
+            <div>
+              <p
+                class="mb-2 text-[11px] font-semibold uppercase tracking-[0.16em] text-sweety-red"
+              >
+                Collection 01
+              </p>
+
+              <h3
+                id="fruits-title"
+                class="font-display text-2xl sm:text-3xl"
+              >
+                Fruits d'amour
+              </h3>
+            </div>
+
+            <span class="text-xs text-sweety-brown/60">
+              {fruitProducts.length} produits
+            </span>
+          </div>
+
+          <div class="grid sm:grid-cols-2 lg:grid-cols-4">
+            {
+              fruitProducts.map((product) => (
+                <article
+                  class="border-b border-sweety-brown/15 py-7 sm:px-5 sm:first:pl-0 lg:border-r lg:last:border-r-0"
+                >
+                  <h4 class="font-display text-xl leading-tight">
+                    {product.name}
+                  </h4>
 
                   {product.description && (
-                    <p>{product.description}</p>
+                    <p
+                      class="mt-3 text-sm leading-6 text-sweety-brown/70"
+                    >
+                      {product.description}
+                    </p>
                   )}
 
                   {product.priceFrom !== undefined && (
-                    <p>
-                      À partir de {product.priceFrom.toFixed(2)} €
-                      {product.unit ? ` — ${product.unit}` : ""}
+                    <p class="mt-5 text-sm font-semibold">
+                      À partir de {formatPrice(product.priceFrom)}
+
+                      {product.unit && (
+                        <span class="font-normal text-sweety-brown/60">
+                          {" "}· {product.unit}
+                        </span>
+                      )}
                     </p>
                   )}
-                </li>
-              ))}
-            </ul>
-          </section>
-        );
-      })
-    }
+                </article>
+              ))
+            }
+          </div>
+        </section>
 
-    <a href="/commander/">
-      Commander
-    </a>
+        <!-- CHOCOLAT -->
+        <section
+          aria-labelledby="chocolate-title"
+          class="mt-16 sm:mt-20"
+        >
+          <div
+            class="flex items-end justify-between gap-6 border-b border-sweety-brown/35 pb-5"
+          >
+            <div>
+              <p
+                class="mb-2 text-[11px] font-semibold uppercase tracking-[0.16em] text-sweety-red"
+              >
+                Collection 02
+              </p>
+
+              <h3
+                id="chocolate-title"
+                class="font-display text-2xl sm:text-3xl"
+              >
+                Créations chocolatées
+              </h3>
+            </div>
+
+            <span class="text-xs text-sweety-brown/60">
+              {chocolateProducts.length} produits
+            </span>
+          </div>
+
+          <div class="grid sm:grid-cols-2 lg:grid-cols-4">
+            {
+              chocolateProducts.map((product) => (
+                <article
+                  class="border-b border-sweety-brown/15 py-7 sm:px-5 sm:first:pl-0 lg:border-r lg:last:border-r-0"
+                >
+                  <h4 class="font-display text-xl leading-tight">
+                    {product.name}
+                  </h4>
+
+                  {product.description && (
+                    <p
+                      class="mt-3 text-sm leading-6 text-sweety-brown/70"
+                    >
+                      {product.description}
+                    </p>
+                  )}
+
+                  {product.priceFrom !== undefined && (
+                    <p class="mt-5 text-sm font-semibold">
+                      À partir de {formatPrice(product.priceFrom)}
+
+                      {product.unit && (
+                        <span class="font-normal text-sweety-brown/60">
+                          {" "}· {product.unit}
+                        </span>
+                      )}
+                    </p>
+                  )}
+                </article>
+              ))
+            }
+          </div>
+        </section>
+
+        <!-- CONFISERIES -->
+        <section
+          aria-labelledby="confectionery-title"
+          class="mt-16 sm:mt-20"
+        >
+          <div
+            class="flex items-end justify-between gap-6 border-b border-sweety-brown/35 pb-5"
+          >
+            <div>
+              <p
+                class="mb-2 text-[11px] font-semibold uppercase tracking-[0.16em] text-sweety-red"
+              >
+                Collection 03
+              </p>
+
+              <h3
+                id="confectionery-title"
+                class="font-display text-2xl sm:text-3xl"
+              >
+                Confiseries
+              </h3>
+            </div>
+
+            <span class="text-xs text-sweety-brown/60">
+              {confectioneryProducts.length} produits
+            </span>
+          </div>
+
+          <div class="grid sm:grid-cols-2">
+            {
+              confectioneryProducts.map((product) => (
+                <article
+                  class="border-b border-sweety-brown/15 py-7 sm:px-5 sm:first:pl-0 sm:first:border-r"
+                >
+                  <h4 class="font-display text-xl leading-tight">
+                    {product.name}
+                  </h4>
+
+                  {product.description && (
+                    <p
+                      class="mt-3 max-w-md text-sm leading-6 text-sweety-brown/70"
+                    >
+                      {product.description}
+                    </p>
+                  )}
+
+                  {product.priceFrom !== undefined && (
+                    <p class="mt-5 text-sm font-semibold">
+                      À partir de {formatPrice(product.priceFrom)}
+
+                      {product.unit && (
+                        <span class="font-normal text-sweety-brown/60">
+                          {" "}· {product.unit}
+                        </span>
+                      )}
+                    </p>
+                  )}
+                </article>
+              ))
+            }
+          </div>
+        </section>
+
+      </div>
+    </section>
+
+    <!-- FINAL CTA -->
+    <section
+      class="bg-[#F1E4D8] px-6 py-14 sm:px-10 sm:py-16 lg:px-12"
+      aria-labelledby="product-cta-title"
+    >
+      <div
+        class="mx-auto flex max-w-6xl flex-col gap-7 md:flex-row md:items-center md:justify-between"
+      >
+        <div>
+          <p
+            class="mb-3 text-xs font-semibold uppercase tracking-[0.16em] text-sweety-red"
+          >
+            Votre sélection
+          </p>
+
+          <h2
+            id="product-cta-title"
+            class="max-w-xl font-display text-3xl leading-tight sm:text-4xl"
+          >
+            Vous avez trouvé votre prochaine gourmandise ?
+          </h2>
+        </div>
+
+        <div class="flex flex-wrap gap-3">
+          <a
+            href="/saveurs/"
+            class="inline-flex min-h-12 items-center justify-center rounded-full border border-sweety-brown/30 px-7 py-3 text-sm font-semibold transition-colors hover:bg-white focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-sweety-brown"
+          >
+            Voir les saveurs
+          </a>
+
+          <a
+            href={siteConfig.instagram.url}
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="Commander chez Sweety Apple via Instagram"
+            class="inline-flex min-h-12 items-center justify-center gap-2 rounded-full bg-sweety-red px-7 py-3 text-sm font-semibold text-white transition-colors hover:bg-sweety-brown focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-sweety-red"
+          >
+            Commander
+
+            <svg
+              viewBox="0 0 16 16"
+              fill="none"
+              aria-hidden="true"
+              class="h-4 w-4"
+            >
+              <path
+                d="M4.25 11.75 11.75 4.25M6 4.25h5.75V10"
+                stroke="currentColor"
+                stroke-width="1.5"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              />
+            </svg>
+          </a>
+        </div>
+      </div>
+    </section>
+
   </main>
 </BaseLayout>

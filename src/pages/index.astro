@@ -1,9 +1,11 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
 import { Image } from "astro:assets";
+import { siteConfig } from "../config/site";
 
 import heroShowcase from "../assets/images/hero-showcase.png";
 import pommeRouge from "../assets/images/pomme-rouge.webp";
+import pommeRose from "../assets/images/pomme-rose.png";
 import fraiseCoco from "../assets/images/fraise-chocolat-coco.webp";
 import rosesDubai from "../assets/images/roses-dubai.webp";
 
@@ -19,10 +21,21 @@ const formatPrice = (value: number) =>
     currency: "EUR",
   }).format(value);
 
-const minApplePrice = Math.min(...appleFlavours.map((flavour) => flavour.price));
-const apples = products.find((product) => product.slug === "pommes-amour");
-const strawberries = products.find((product) => product.slug === "fraises-chocolat");
-const dubaiRose = products.find((product) => product.slug === "tablette-chocolat-dubai");
+const minApplePrice = Math.min(
+  ...appleFlavours.map((flavour) => flavour.price)
+);
+
+const apples = products.find(
+  (product) => product.slug === "pommes-amour"
+);
+
+const strawberries = products.find(
+  (product) => product.slug === "fraises-chocolat"
+);
+
+const dubaiRose = products.find(
+  (product) => product.slug === "tablette-chocolat-dubai"
+);
 
 const collections = [
   {
@@ -33,8 +46,8 @@ const collections = [
     price: apples?.priceFrom,
     priceLabel: "Dès",
     image: pommeRouge,
-    imageAlt: "Pomme d'amour rouge et brillante avec un enrobage sucré",
-    imageBackground: "bg-[#F3E7DE]",
+    imageAlt:
+      "Pomme d'amour rouge et brillante avec un enrobage sucré",
     href: "/saveurs/",
     linkText: "Découvrir les saveurs",
   },
@@ -42,12 +55,13 @@ const collections = [
     number: "02",
     eyebrow: "La collection chocolat",
     name: strawberries?.name ?? "Fraises au chocolat",
-    description: "En box de 5, avec le chocolat et les toppings de votre choix.",
+    description:
+      "En box de 5, avec le chocolat et les toppings de votre choix.",
     price: strawberries?.priceFrom,
     priceLabel: "Box de 5 ·",
     image: fraiseCoco,
-    imageAlt: "Fraise coupée en deux, enrobée de chocolat clair et de copeaux de coco",
-    imageBackground: "bg-[#F5EEE7]",
+    imageAlt:
+      "Fraise coupée en deux, enrobée de chocolat clair et de copeaux de coco",
     href: "/produits/",
     linkText: "Voir les créations chocolatées",
   },
@@ -55,12 +69,13 @@ const collections = [
     number: "03",
     eyebrow: "La touche Dubai",
     name: dubaiRose?.name ?? "Chocolats Dubai",
-    description: "Une création chocolatée en forme de rose, à découvrir dans notre collection.",
+    description:
+      "Une création chocolatée en forme de rose, à découvrir dans notre collection.",
     price: undefined,
     priceLabel: "",
     image: rosesDubai,
-    imageAlt: "Chocolats Dubai en forme de rose, dont certains sont coupés pour montrer leur garniture",
-    imageBackground: "bg-[#EEE4DC]",
+    imageAlt:
+      "Chocolats Dubai en forme de rose, dont certains sont coupés pour montrer leur garniture",
     href: "/produits/",
     linkText: "Explorer les produits",
   },
@@ -90,7 +105,8 @@ const orderSteps = [
   description="Découvrez Sweety Apple à Bruxelles : pommes d'amour aux multiples saveurs, fraises au chocolat et créations Dubai. Commandes à l'avance."
 >
   <main class="bg-sweety-cream font-body text-sweety-brown">
-    <!-- Approved full-background hero: unchanged in composition -->
+
+    <!-- HERO -->
     <section
       aria-labelledby="hero-title"
       class="relative isolate flex min-h-[82svh] items-end overflow-hidden bg-sweety-cream lg:min-h-[88svh] lg:items-center"
@@ -106,35 +122,68 @@ const orderSteps = [
         fetchpriority="high"
         class="absolute inset-0 -z-10 h-full w-full object-cover object-[72%_center] lg:object-center"
       />
+
       <div
         aria-hidden="true"
         class="pointer-events-none absolute inset-0 -z-10 bg-linear-to-t from-sweety-cream via-sweety-cream/90 to-transparent lg:bg-linear-to-r lg:from-sweety-cream/45 lg:via-sweety-cream/10 lg:to-transparent"
       ></div>
-      <div class="mx-auto w-full max-w-[1600px] px-6 pb-10 pt-[22svh] sm:px-10 lg:px-16 lg:py-24 xl:px-24">
+
+      <div
+        class="mx-auto w-full max-w-[1600px] px-6 pb-10 pt-[22svh] sm:px-10 lg:px-16 lg:py-24 xl:px-24"
+      >
         <div class="max-w-[620px]">
-          <p class="mb-6 flex items-center gap-3 text-xs font-semibold uppercase tracking-[0.2em]">
-            <span aria-hidden="true" class="h-px w-7 bg-sweety-red"></span>
+          <p
+            class="mb-6 flex items-center gap-3 text-xs font-semibold uppercase tracking-[0.2em]"
+          >
+            <span
+              aria-hidden="true"
+              class="h-px w-7 bg-sweety-red"
+            ></span>
+
             Sweety Apple · Bruxelles
           </p>
+
           <h1
             id="hero-title"
             class="max-w-[12ch] font-display text-[clamp(3rem,6vw,6.4rem)] font-semibold leading-[1.03] tracking-[-0.045em]"
           >
             Pommes d'amour
-            <em class="mt-1 block font-normal text-sweety-red">à Bruxelles.</em>
+
+            <em
+              class="mt-1 block font-normal text-sweety-red"
+            >
+              à Bruxelles.
+            </em>
           </h1>
-          <p class="mt-7 max-w-[440px] text-base leading-7 text-sweety-brown/90 sm:text-lg sm:leading-8">
+
+          <p
+            class="mt-7 max-w-[440px] text-base leading-7 text-sweety-brown/90 sm:text-lg sm:leading-8"
+          >
             Des pommes d'amour hautes en couleur, aux saveurs fruitées,
             acidulées et gourmandes. À vous de choisir votre préférée.
           </p>
+
           <div class="mt-9 flex flex-col gap-3 sm:flex-row">
             <a
               href="/saveurs/"
               class="inline-flex min-h-12 items-center justify-center gap-3 rounded-full bg-sweety-red px-7 py-3.5 text-sm font-semibold text-white transition-colors duration-200 hover:bg-sweety-brown focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-sweety-red motion-reduce:transition-none"
             >
               Découvrir les saveurs
-              <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" class="h-[18px] w-[18px] shrink-0"><path d="M7 17 17 7M8 7h9v9" /></svg>
+
+              <svg
+                aria-hidden="true"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.8"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                class="h-[18px] w-[18px] shrink-0"
+              >
+                <path d="M7 17 17 7M8 7h9v9" />
+              </svg>
             </a>
+
             <a
               href="/commander/"
               class="inline-flex min-h-12 items-center justify-center rounded-full border border-sweety-brown/30 bg-sweety-cream/85 px-7 py-3.5 text-sm font-semibold transition-colors duration-200 hover:bg-sweety-cream focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-sweety-brown motion-reduce:transition-none"
@@ -142,173 +191,429 @@ const orderSteps = [
               Comment commander ?
             </a>
           </div>
-          <p class="mt-9 border-t border-sweety-brown/20 pt-5 text-sm text-sweety-brown/85">
+
+          <p
+            class="mt-9 border-t border-sweety-brown/20 pt-5 text-sm text-sweety-brown/85"
+          >
             {appleFlavours.length} saveurs
-            <span class="mx-2" aria-hidden="true">·</span>
+
+            <span
+              class="mx-2"
+              aria-hidden="true"
+            >
+              ·
+            </span>
+
             Dès {formatPrice(minApplePrice)}
-            <span class="mx-2" aria-hidden="true">·</span>
+
+            <span
+              class="mx-2"
+              aria-hidden="true"
+            >
+              ·
+            </span>
+
             Retrait à Molenbeek
           </p>
         </div>
       </div>
     </section>
 
-    <!-- Three aligned, controlled-size product features -->
-    <section aria-labelledby="collection-title" class="px-6 py-16 sm:px-10 sm:py-20 lg:px-12">
+    <!-- PRODUCTS -->
+    <section
+      aria-labelledby="collection-title"
+      class="px-6 py-16 sm:px-10 sm:py-20 lg:px-12"
+    >
       <div class="mx-auto max-w-6xl">
-        <div class="grid gap-5 border-b border-sweety-brown/15 pb-8 md:grid-cols-[1.15fr_0.85fr] md:items-end md:gap-12">
+
+        <div
+          class="grid gap-5 border-b border-sweety-brown/15 pb-8 md:grid-cols-[1.15fr_0.85fr] md:items-end md:gap-12"
+        >
           <div>
-            <p class="mb-3 text-xs font-semibold uppercase tracking-[0.16em] text-sweety-red">Nos créations</p>
-            <h2 id="collection-title" class="max-w-[650px] font-display text-3xl leading-[1.15] sm:text-4xl lg:text-5xl">
+            <p
+              class="mb-3 text-xs font-semibold uppercase tracking-[0.16em] text-sweety-red"
+            >
+              Nos créations
+            </p>
+
+            <h2
+              id="collection-title"
+              class="max-w-[650px] font-display text-3xl leading-[1.15] sm:text-4xl lg:text-5xl"
+            >
               Des douceurs qui donnent envie.
             </h2>
           </div>
-          <p class="max-w-sm text-sm leading-7 text-sweety-brown/75 md:justify-self-end sm:text-base">
+
+          <p
+            class="max-w-sm text-sm leading-7 text-sweety-brown/75 sm:text-base md:justify-self-end"
+          >
             Pommes d'amour, fraises au chocolat et créations Dubai :
             découvrez les incontournables de Sweety Apple.
           </p>
         </div>
 
-        <div class="mt-8 grid gap-10 md:grid-cols-3 md:gap-5 lg:gap-7">
-          {collections.map((item) => (
-            <article class="flex min-w-0 flex-col">
-              <div class={`flex h-[225px] items-center justify-center overflow-hidden ${item.imageBackground} sm:h-[255px] lg:h-[285px]`}>
-                <Image
-                  src={item.image}
-                  alt={item.imageAlt}
-                  widths={[320, 480, 640, 840]}
-                  sizes="(min-width: 768px) 31vw, 100vw"
-                  loading="lazy"
-                  class="h-full w-full object-contain p-4 sm:p-5"
-                />
-              </div>
-              <div class="flex flex-1 flex-col pt-5">
-                <p class="text-[11px] font-semibold uppercase tracking-[0.17em] text-sweety-red">
-                  {item.number} · {item.eyebrow}
-                </p>
-                <h3 class="mt-3 font-display text-2xl leading-[1.2] lg:text-[1.75rem]">{item.name}</h3>
-                <p class="mt-3 max-w-sm text-sm leading-6 text-sweety-brown/75">{item.description}</p>
-                {item.price !== undefined && (
-                  <p class="mt-4 text-sm font-semibold">
-                    {item.priceLabel} {formatPrice(item.price)}
-                  </p>
-                )}
-                <a
-                  href={item.href}
-                  class="mt-5 inline-flex min-h-11 w-fit items-center gap-2 border-b border-sweety-brown/40 pb-1 text-sm font-semibold transition-colors hover:border-sweety-red hover:text-sweety-red focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-sweety-red md:mt-auto md:pt-6"
+        <div
+          class="mx-auto mt-8 grid max-w-5xl gap-10 md:grid-cols-3 md:gap-5 lg:gap-7"
+        >
+          {
+            collections.map((item) => (
+              <article class="flex min-w-0 flex-col">
+                <div
+                  class="aspect-square w-full overflow-hidden bg-sweety-cream"
                 >
-                  {item.linkText}
-                  <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" class="h-4 w-4"><path d="M5 12h14m-6-6 6 6-6 6" /></svg>
-                </a>
-              </div>
-            </article>
-          ))}
+                  <Image
+                    src={item.image}
+                    alt={item.imageAlt}
+                    widths={[320, 480, 640, 840]}
+                    sizes="(min-width: 768px) 31vw, 100vw"
+                    loading="lazy"
+                    class="block h-full w-full object-cover object-[center_42%]"
+                  />
+                </div>
+
+                <div class="flex flex-1 flex-col pt-5">
+                  <p
+                    class="text-[11px] font-semibold uppercase tracking-[0.17em] text-sweety-red"
+                  >
+                    {item.number} · {item.eyebrow}
+                  </p>
+
+                  <h3
+                    class="mt-3 font-display text-2xl leading-[1.2] lg:text-[1.75rem]"
+                  >
+                    {item.name}
+                  </h3>
+
+                  <p
+                    class="mt-3 max-w-sm text-sm leading-6 text-sweety-brown/75"
+                  >
+                    {item.description}
+                  </p>
+
+                  {item.price !== undefined && (
+                    <p class="mt-4 text-sm font-semibold">
+                      {item.priceLabel} {formatPrice(item.price)}
+                    </p>
+                  )}
+
+                  <a
+                    href={item.href}
+                    class="mt-5 inline-flex min-h-11 w-fit items-center gap-2 border-b border-sweety-brown/40 pb-1 text-sm font-semibold transition-colors hover:border-sweety-red hover:text-sweety-red focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-sweety-red md:mt-auto md:pt-6"
+                  >
+                    {item.linkText}
+
+                    <svg
+                      aria-hidden="true"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="1.8"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      class="h-4 w-4"
+                    >
+                      <path d="M5 12h14m-6-6 6 6-6 6" />
+                    </svg>
+                  </a>
+                </div>
+              </article>
+            ))
+          }
         </div>
       </div>
     </section>
 
-    <!-- Flavor preview is text-only on purpose: products are already showcased above -->
-    <section aria-labelledby="flavours-title" class="border-y border-sweety-brown/10 bg-white/60 px-6 py-14 sm:px-10 lg:px-12">
-      <div class="mx-auto flex max-w-6xl flex-col gap-5 sm:flex-row sm:items-center sm:justify-between sm:gap-10">
+    <!-- FLAVOURS -->
+    <section
+      aria-labelledby="flavours-title"
+      class="border-y border-sweety-brown/10 bg-white/60 px-6 py-14 sm:px-10 lg:px-12"
+    >
+      <div
+        class="mx-auto flex max-w-6xl flex-col gap-5 sm:flex-row sm:items-center sm:justify-between sm:gap-10"
+      >
         <div>
-          <p class="mb-2 text-xs font-semibold uppercase tracking-[0.16em] text-sweety-red">Pommes d'amour</p>
-          <h2 id="flavours-title" class="font-display text-2xl leading-snug sm:text-3xl">
+          <p
+            class="mb-2 text-xs font-semibold uppercase tracking-[0.16em] text-sweety-red"
+          >
+            Pommes d'amour
+          </p>
+
+          <h2
+            id="flavours-title"
+            class="font-display text-2xl leading-snug sm:text-3xl"
+          >
             {appleFlavours.length} saveurs à explorer.
           </h2>
-          <p class="mt-2 text-sm leading-6 text-sweety-brown/75">
-            Acidulées ou non acidulées, à partir de {formatPrice(minApplePrice)}.
+
+          <p
+            class="mt-2 text-sm leading-6 text-sweety-brown/75"
+          >
+            Acidulées ou non acidulées, à partir de
+            {" "}
+            {formatPrice(minApplePrice)}.
           </p>
         </div>
-        <a href="/saveurs/" class="inline-flex min-h-12 shrink-0 items-center justify-center rounded-full bg-sweety-red px-6 py-3 text-sm font-semibold text-white transition-colors hover:bg-sweety-brown focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-sweety-red">
+
+        <a
+          href="/saveurs/"
+          class="inline-flex min-h-12 shrink-0 items-center justify-center rounded-full bg-sweety-red px-6 py-3 text-sm font-semibold text-white transition-colors hover:bg-sweety-brown focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-sweety-red"
+        >
           Voir toutes les saveurs
         </a>
       </div>
     </section>
 
-    <!-- Simple ordering steps, kept on one consistent grid -->
-    <section aria-labelledby="order-title" class="px-6 py-16 sm:px-10 sm:py-20 lg:px-12">
+    <!-- ORDERING -->
+    <section
+      aria-labelledby="order-title"
+      class="px-6 py-16 sm:px-10 sm:py-20 lg:px-12"
+    >
       <div class="mx-auto max-w-6xl">
-        <div class="flex flex-col gap-6 sm:flex-row sm:items-end sm:justify-between">
+        <div
+          class="flex flex-col gap-6 sm:flex-row sm:items-end sm:justify-between"
+        >
           <div>
-            <p class="mb-3 text-xs font-semibold uppercase tracking-[0.16em] text-sweety-red">Comment ça marche ?</p>
-            <h2 id="order-title" class="font-display text-3xl leading-[1.15] sm:text-4xl">
+            <p
+              class="mb-3 text-xs font-semibold uppercase tracking-[0.16em] text-sweety-red"
+            >
+              Comment ça marche ?
+            </p>
+
+            <h2
+              id="order-title"
+              class="font-display text-3xl leading-[1.15] sm:text-4xl"
+            >
               Commander, tout simplement.
             </h2>
           </div>
-          <a href="/commander/" class="inline-flex min-h-11 w-fit items-center border-b border-sweety-brown/40 pb-1 text-sm font-semibold transition-colors hover:text-sweety-red focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-sweety-red">
+
+          <a
+            href="/commander/"
+            class="inline-flex min-h-11 w-fit items-center border-b border-sweety-brown/40 pb-1 text-sm font-semibold transition-colors hover:text-sweety-red focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-sweety-red"
+          >
             Toutes les conditions
           </a>
         </div>
-        <ol class="mt-9 grid gap-5 md:grid-cols-3 md:gap-7">
-          {orderSteps.map((step) => (
-            <li class="border-t border-sweety-brown/25 pt-5">
-              <p class="text-xs font-semibold tracking-[0.16em] text-sweety-red">{step.number}</p>
-              <h3 class="mt-4 font-display text-xl">{step.title}</h3>
-              <p class="mt-2 max-w-sm text-sm leading-7 text-sweety-brown/75">{step.text}</p>
-            </li>
-          ))}
+
+        <ol
+          class="mt-9 grid gap-5 md:grid-cols-3 md:gap-7"
+        >
+          {
+            orderSteps.map((step) => (
+              <li
+                class="border-t border-sweety-brown/25 pt-5"
+              >
+                <p
+                  class="text-xs font-semibold tracking-[0.16em] text-sweety-red"
+                >
+                  {step.number}
+                </p>
+
+                <h3 class="mt-4 font-display text-xl">
+                  {step.title}
+                </h3>
+
+                <p
+                  class="mt-2 max-w-sm text-sm leading-7 text-sweety-brown/75"
+                >
+                  {step.text}
+                </p>
+              </li>
+            ))
+          }
         </ol>
-        <p class="mt-7 text-sm leading-6 text-sweety-brown/75">
-          Un acompte par virement bancaire est nécessaire pour confirmer une commande.
+
+        <p
+          class="mt-7 text-sm leading-6 text-sweety-brown/75"
+        >
+          Un acompte par virement bancaire est nécessaire pour confirmer
+          une commande.
         </p>
       </div>
     </section>
 
-    <!-- Event offering, deliberately compact -->
-    <section aria-labelledby="events-title" class="bg-[#F1E4D8] px-6 py-14 sm:px-10 sm:py-16 lg:px-12">
-      <div class="mx-auto grid max-w-6xl gap-6 md:grid-cols-[1fr_1fr] md:items-center md:gap-16">
-        <div>
-          <p class="mb-3 text-xs font-semibold uppercase tracking-[0.16em] text-sweety-red">Pour vos événements</p>
-          <h2 id="events-title" class="max-w-md font-display text-3xl leading-[1.15] sm:text-4xl">
+    <!-- EVENTS -->
+    <section
+      aria-labelledby="events-title"
+      class="bg-[#F1E4D8] px-6 py-16 sm:px-10 sm:py-20 lg:px-12"
+    >
+      <div
+        class="mx-auto grid max-w-6xl items-center gap-9 md:grid-cols-[1.1fr_0.9fr] md:gap-14"
+      >
+        <div class="max-w-lg">
+          <p
+            class="mb-3 text-xs font-semibold uppercase tracking-[0.16em] text-sweety-red"
+          >
+            Pour vos événements
+          </p>
+
+          <h2
+            id="events-title"
+            class="font-display text-3xl leading-[1.15] sm:text-4xl"
+          >
             Une touche sucrée, à votre image.
           </h2>
-        </div>
-        <div>
-          <p class="max-w-md text-sm leading-7 text-sweety-brown/80 sm:text-base">
+
+          <p
+            class="mt-5 text-sm leading-7 text-sweety-brown/80 sm:text-base"
+          >
             Pommes d'amour, mini pommes et sucettes Sour++ :
-            des créations personnalisables selon le thème et les couleurs de votre événement.
+            des créations personnalisables selon les couleurs et le thème
+            de votre événement.
           </p>
-          <p class="mt-3 text-sm font-semibold">Commande à prévoir 2 à 3 semaines à l'avance.</p>
-          <a href="/evenements/" class="mt-5 inline-flex min-h-11 w-fit items-center gap-2 border-b border-sweety-brown/40 pb-1 text-sm font-semibold hover:text-sweety-red focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-sweety-red">
+
+          <p class="mt-4 text-sm font-semibold">
+            Commande à prévoir 2 à 3 semaines à l'avance.
+          </p>
+
+          <a
+            href="/evenements/"
+            class="mt-6 inline-flex min-h-11 w-fit items-center gap-2 border-b border-sweety-brown/40 pb-1 text-sm font-semibold hover:text-sweety-red focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-sweety-red"
+          >
             Découvrir les commandes événementielles
+
+            <svg
+              aria-hidden="true"
+              width="16"
+              height="16"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.8"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              class="h-4 w-4 shrink-0"
+            >
+              <path d="M5 12h14m-6-6 6 6-6 6" />
+            </svg>
           </a>
         </div>
+
+        <div
+          class="aspect-[4/3] max-h-[330px] w-full overflow-hidden bg-[#EBD8CA]"
+        >
+          <Image
+            src={pommeRose}
+            alt="Pomme d'amour rose décorée de garniture sucrée Sweety Apple"
+            widths={[360, 540, 760, 1000]}
+            sizes="(min-width: 768px) 40vw, 100vw"
+            loading="lazy"
+            class="block h-full w-full object-cover object-center"
+          />
+        </div>
       </div>
     </section>
 
-    <!-- Compact FAQ -->
-    <section aria-labelledby="faq-title" class="px-6 py-16 sm:px-10 sm:py-20 lg:px-12">
-      <div class="mx-auto grid max-w-6xl gap-8 md:grid-cols-[0.8fr_1.2fr] md:gap-16">
+    <!-- FAQ -->
+    <section
+      aria-labelledby="faq-title"
+      class="px-6 py-16 sm:px-10 sm:py-20 lg:px-12"
+    >
+      <div
+        class="mx-auto grid max-w-6xl gap-8 md:grid-cols-[0.8fr_1.2fr] md:gap-16"
+      >
         <div>
-          <p class="mb-3 text-xs font-semibold uppercase tracking-[0.16em] text-sweety-red">Bon à savoir</p>
-          <h2 id="faq-title" class="font-display text-3xl leading-[1.15] sm:text-4xl">Vos questions.</h2>
-          <a href="/faq/" class="mt-5 inline-flex min-h-11 w-fit items-center border-b border-sweety-brown/40 pb-1 text-sm font-semibold hover:text-sweety-red focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-sweety-red">Toute la FAQ</a>
+          <p
+            class="mb-3 text-xs font-semibold uppercase tracking-[0.16em] text-sweety-red"
+          >
+            Bon à savoir
+          </p>
+
+          <h2
+            id="faq-title"
+            class="font-display text-3xl leading-[1.15] sm:text-4xl"
+          >
+            Vos questions.
+          </h2>
+
+          <a
+            href="/faq/"
+            class="mt-5 inline-flex min-h-11 w-fit items-center border-b border-sweety-brown/40 pb-1 text-sm font-semibold hover:text-sweety-red focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-sweety-red"
+          >
+            Toute la FAQ
+          </a>
         </div>
+
         <div class="border-t border-sweety-brown/20">
-          {faqItems.slice(0, 3).map((item) => (
-            <details class="group border-b border-sweety-brown/20">
-              <summary class="flex min-h-14 cursor-pointer list-none items-center justify-between gap-6 py-4 text-sm font-semibold leading-6 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-sweety-red [&::-webkit-details-marker]:hidden">
-                {item.question}
-                <span aria-hidden="true" class="shrink-0 text-lg font-normal text-sweety-red group-open:rotate-45 motion-reduce:transition-none">+</span>
-              </summary>
-              <p class="max-w-xl pb-5 text-sm leading-7 text-sweety-brown/75">{item.answer}</p>
-            </details>
-          ))}
+          {
+            faqItems.slice(0, 3).map((item) => (
+              <details
+                class="group border-b border-sweety-brown/20"
+              >
+                <summary
+                  class="flex min-h-14 cursor-pointer list-none items-center justify-between gap-6 py-4 text-sm font-semibold leading-6 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-sweety-red [&::-webkit-details-marker]:hidden"
+                >
+                  {item.question}
+
+                  <span
+                    aria-hidden="true"
+                    class="shrink-0 text-lg font-normal text-sweety-red group-open:rotate-45 motion-reduce:transition-none"
+                  >
+                    +
+                  </span>
+                </summary>
+
+                <p
+                  class="max-w-xl pb-5 text-sm leading-7 text-sweety-brown/75"
+                >
+                  {item.answer}
+                </p>
+              </details>
+            ))
+          }
         </div>
       </div>
     </section>
 
-    <!-- Quiet final CTA -->
-    <section aria-labelledby="final-title" class="bg-sweety-brown px-6 py-14 text-sweety-cream sm:px-10 sm:py-16 lg:px-12">
-      <div class="mx-auto flex max-w-6xl flex-col gap-6 md:flex-row md:items-center md:justify-between md:gap-12">
+    <!-- FINAL CTA -->
+    <section
+      aria-labelledby="final-title"
+      class="bg-sweety-brown px-6 py-14 text-sweety-cream sm:px-10 sm:py-16 lg:px-12"
+    >
+      <div
+        class="mx-auto flex max-w-6xl flex-col gap-6 md:flex-row md:items-center md:justify-between md:gap-12"
+      >
         <div>
-          <p class="mb-2 text-xs font-semibold uppercase tracking-[0.16em] text-[#F6BCB0]">Sweety Apple · Bruxelles</p>
-          <h2 id="final-title" class="font-display text-3xl leading-[1.15] text-sweety-cream sm:text-4xl">Prêt à choisir votre douceur ?</h2>
+          <p
+            class="mb-2 text-xs font-semibold uppercase tracking-[0.16em] text-[#F6BCB0]"
+          >
+            Sweety Apple · Bruxelles
+          </p>
+
+          <h2
+            id="final-title"
+            class="font-display text-3xl leading-[1.15] text-sweety-cream sm:text-4xl"
+          >
+            Prêt à choisir votre douceur ?
+          </h2>
         </div>
-        <a href="/commander/" class="inline-flex min-h-12 w-fit shrink-0 items-center justify-center rounded-full bg-sweety-cream px-7 py-3 text-sm font-semibold text-sweety-brown transition-colors hover:bg-white focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white">
-          Comment commander ?
+
+        <a
+          href={siteConfig.instagram.url}
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="Commander chez Sweety Apple via Instagram"
+          class="inline-flex min-h-12 w-fit shrink-0 items-center justify-center gap-2 rounded-full bg-sweety-cream px-7 py-3 text-sm font-semibold text-sweety-brown transition-colors hover:bg-white focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white"
+        >
+          Commander
+
+          <svg
+            viewBox="0 0 16 16"
+            fill="none"
+            aria-hidden="true"
+            class="h-4 w-4"
+          >
+            <path
+              d="M4.25 11.75 11.75 4.25M6 4.25h5.75V10"
+              stroke="currentColor"
+              stroke-width="1.5"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            />
+          </svg>
         </a>
       </div>
     </section>
+
   </main>
 </BaseLayout>

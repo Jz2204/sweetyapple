@@ -9,4 +9,9 @@ export const siteConfig = {
     "Découvrez les pommes d'amour, fruits gourmands et créations chocolatées de Sweety Apple à Bruxelles.",
 
   defaultSocialImage: "/og-default.jpg",
+
+  instagram: {
+    handle: "@sweety.apple_brussels",
+    url: "https://www.instagram.com/sweety.apple_brussels/",
+  },
 } as const;

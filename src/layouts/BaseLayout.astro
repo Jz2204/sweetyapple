@@ -1,5 +1,6 @@
 ---
 import "../styles/global.css";
+
 import Header from "../components/layout/Header.astro";
 import Footer from "../components/layout/Footer.astro";
 import { siteConfig } from "../config/site";
@@ -9,6 +10,7 @@ interface Props {
   description?: string;
   canonical?: string;
   image?: string;
+  imageAlt?: string;
   noindex?: boolean;
 }
 
@@ -17,28 +19,38 @@ const {
   description = siteConfig.defaultDescription,
   canonical,
   image = siteConfig.defaultSocialImage,
+  imageAlt = "Sweety Apple à Bruxelles",
   noindex = false,
 } = Astro.props;
 
-const canonicalURL =
-  canonical ??
-  (Astro.site
+const canonicalURL = canonical
+  ? Astro.site
+    ? new URL(canonical, Astro.site).toString()
+    : canonical
+  : Astro.site
     ? new URL(Astro.url.pathname, Astro.site).toString()
-    : undefined);
+    : undefined;
 
-const imageURL =
-  image && Astro.site
+const imageURL = image
+  ? Astro.site
     ? new URL(image, Astro.site).toString()
-    : image;
+    : image
+  : undefined;
 ---
 
 <!doctype html>
 <html lang={siteConfig.locale}>
   <head>
     <meta charset="UTF-8" />
+
     <meta
       name="viewport"
       content="width=device-width, initial-scale=1"
+    />
+
+    <meta
+      name="theme-color"
+      content="#FAF7F2"
     />
 
     <title>{title}</title>
@@ -66,11 +78,31 @@ const imageURL =
       )
     }
 
-    <meta property="og:type" content="website" />
-    <meta property="og:locale" content={siteConfig.ogLocale} />
-    <meta property="og:site_name" content={siteConfig.siteName} />
-    <meta property="og:title" content={title} />
-    <meta property="og:description" content={description} />
+    <!-- Open Graph -->
+    <meta
+      property="og:type"
+      content="website"
+    />
+
+    <meta
+      property="og:locale"
+      content={siteConfig.ogLocale}
+    />
+
+    <meta
+      property="og:site_name"
+      content={siteConfig.siteName}
+    />
+
+    <meta
+      property="og:title"
+      content={title}
+    />
+
+    <meta
+      property="og:description"
+      content={description}
+    />
 
     {
       canonicalURL && (
@@ -83,13 +115,21 @@ const imageURL =
 
     {
       imageURL && (
-        <meta
-          property="og:image"
-          content={imageURL}
-        />
+        <>
+          <meta
+            property="og:image"
+            content={imageURL}
+          />
+
+          <meta
+            property="og:image:alt"
+            content={imageAlt}
+          />
+        </>
       )
     }
 
+    <!-- Twitter / social cards -->
     <meta
       name="twitter:card"
       content={imageURL ? "summary_large_image" : "summary"}
@@ -107,10 +147,17 @@ const imageURL =
 
     {
       imageURL && (
-        <meta
-          name="twitter:image"
-          content={imageURL}
-        />
+        <>
+          <meta
+            name="twitter:image"
+            content={imageURL}
+          />
+
+          <meta
+            name="twitter:image:alt"
+            content={imageAlt}
+          />
+        </>
       )
     }
   </head>

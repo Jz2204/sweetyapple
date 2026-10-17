@@ -1,5 +1,10 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
+import { Image } from "astro:assets";
+import { siteConfig } from "../config/site";
+
+import pommeRose from "../assets/images/pomme-rose.png";
+
 import {
   orderingRules,
   eventRules,
@@ -10,100 +15,411 @@ import {
 
 <BaseLayout
   title="Pommes d'amour pour événements à Bruxelles | Sweety Apple"
-  description="Personnalisez vos pommes d'amour et douceurs Sweety Apple pour anniversaires et événements à Bruxelles."
+  description="Découvrez les créations Sweety Apple pour vos événements à Bruxelles : pommes d'amour, mini pommes, sucettes Sour++ et personnalisation selon votre thème."
 >
-  <main>
-    <header>
-      <h1>Des créations gourmandes pour vos événements</h1>
+  <main class="bg-sweety-cream font-body text-sweety-brown">
 
-      <p>
-        Sweety Apple propose des commandes personnalisables pour vos événements.
-      </p>
-    </header>
+    <!-- HERO -->
+    <section class="px-6 pb-16 pt-14 sm:px-10 sm:pb-20 sm:pt-20 lg:px-12">
+      <div
+        class="mx-auto grid max-w-6xl items-center gap-12 lg:grid-cols-[0.9fr_1.1fr] lg:gap-16"
+      >
+        <!-- Text -->
+        <div>
+          <p
+            class="mb-5 text-xs font-semibold uppercase tracking-[0.16em] text-sweety-red"
+          >
+            Sweety Apple · Événements
+          </p>
 
-    <section>
-      <h2>Produits disponibles</h2>
+          <h1
+            class="max-w-[11ch] font-display text-[clamp(3rem,5vw,4.8rem)] leading-[1.04] tracking-tight"
+          >
+            Des douceurs pour vos moments spéciaux.
+          </h1>
 
-      <ul>
-        {
-          eventRules.products.map((product) => (
-            <li>{product}</li>
-          ))
-        }
-      </ul>
+          <p
+            class="mt-6 max-w-lg text-base leading-8 text-sweety-brown/80 sm:text-lg"
+          >
+            Composez une sélection Sweety Apple adaptée à votre événement,
+            avec des couleurs et un thème personnalisables.
+          </p>
+
+          <div class="mt-8 flex flex-wrap gap-3">
+            <a
+              href={siteConfig.instagram.url}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Commander pour un événement chez Sweety Apple via Instagram"
+              class="inline-flex min-h-12 items-center justify-center gap-2 rounded-full bg-sweety-red px-7 py-3 text-sm font-semibold text-white transition-colors hover:bg-sweety-brown focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-sweety-red"
+            >
+              Commander
+
+              <svg
+                viewBox="0 0 16 16"
+                fill="none"
+                aria-hidden="true"
+                class="h-4 w-4"
+              >
+                <path
+                  d="M4.25 11.75 11.75 4.25M6 4.25h5.75V10"
+                  stroke="currentColor"
+                  stroke-width="1.5"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+              </svg>
+            </a>
+
+            <a
+              href="#offre-evenements"
+              class="inline-flex min-h-12 items-center justify-center rounded-full border border-sweety-brown/30 px-7 py-3 text-sm font-semibold transition-colors hover:bg-white focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-sweety-brown"
+            >
+              Découvrir l'offre
+            </a>
+          </div>
+        </div>
+
+        <!-- Image -->
+        <figure class="w-full">
+          <div
+            class="aspect-[4/5] max-h-[650px] overflow-hidden rounded-[2rem] bg-[#F0E5DD]"
+          >
+            <Image
+              src={pommeRose}
+              alt="Pomme d'amour rose Sweety Apple"
+              widths={[480, 720, 960, 1200]}
+              sizes="(min-width: 1024px) 52vw, 100vw"
+              format="webp"
+              quality={82}
+              loading="eager"
+              class="h-full w-full object-cover"
+            />
+          </div>
+
+          <figcaption
+            class="mt-3 text-xs leading-5 text-sweety-brown/60"
+          >
+            Une création Sweety Apple à adapter à l'univers de votre événement.
+          </figcaption>
+        </figure>
+      </div>
     </section>
 
-    <section>
-      <h2>Personnalisation</h2>
+    <!-- EVENT OFFER -->
+    <section
+      id="offre-evenements"
+      aria-labelledby="event-offer-title"
+      class="scroll-mt-24 border-t border-sweety-brown/15 px-6 py-16 sm:px-10 sm:py-20 lg:px-12"
+    >
+      <div class="mx-auto max-w-6xl">
 
-      <p>
-        Les commandes peuvent être adaptées aux couleurs et au thème de votre événement.
-      </p>
+        <div class="mb-12 max-w-2xl">
+          <p
+            class="mb-3 text-xs font-semibold uppercase tracking-[0.16em] text-sweety-red"
+          >
+            L'offre événements
+          </p>
+
+          <h2
+            id="event-offer-title"
+            class="font-display text-3xl leading-tight sm:text-4xl"
+          >
+            Composez votre sélection.
+          </h2>
+
+          <p
+            class="mt-4 text-sm leading-7 text-sweety-brown/75 sm:text-base"
+          >
+            Plusieurs créations Sweety Apple peuvent être préparées
+            spécialement pour vos événements.
+          </p>
+        </div>
+
+        <div
+          class="grid border-t border-sweety-brown/30 sm:grid-cols-2 lg:grid-cols-4"
+        >
+          {
+            eventRules.products.map((product, index) => (
+              <article
+                class:list={[
+                  "border-b border-sweety-brown/20 py-7 sm:px-6",
+                  index % 2 === 0 && "sm:pl-0",
+                  index === 2 && "lg:pl-6",
+                  "lg:border-r lg:first:pl-0 lg:last:border-r-0",
+                ]}
+              >
+                <p
+                  class="text-[11px] font-semibold uppercase tracking-[0.15em] text-sweety-red"
+                >
+                  {String(index + 1).padStart(2, "0")}
+                </p>
+
+                <h3 class="mt-4 font-display text-xl leading-tight">
+                  {product}
+                </h3>
+              </article>
+            ))
+          }
+        </div>
+      </div>
     </section>
 
-    <section>
-      <h2>Mini pommes d'amour</h2>
+    <!-- PERSONALISATION -->
+    <section
+      aria-labelledby="personalisation-title"
+      class="bg-sweety-red px-6 py-16 text-white sm:px-10 sm:py-20 lg:px-12"
+    >
+      <div
+        class="mx-auto grid max-w-6xl gap-10 lg:grid-cols-[0.8fr_1.2fr] lg:items-center lg:gap-20"
+      >
+        <div>
+          <p
+            class="mb-3 text-xs font-semibold uppercase tracking-[0.16em] text-white/70"
+          >
+            Personnalisation
+          </p>
 
-      <p>
-        Les mini pommes d'amour sont réservées aux événements.
-        Minimum :
-        {" "}
-        {miniAppleEventRules.minimumQuantity}
-        {" "}
-        pièces.
-      </p>
+          <h2
+            id="personalisation-title"
+            class="max-w-md font-display text-3xl leading-tight text-white sm:text-4xl"
+          >
+            Votre thème, vos couleurs.
+          </h2>
+        </div>
+
+        <div>
+          <p
+            class="max-w-xl text-base leading-8 text-white/85 sm:text-lg"
+          >
+            Les créations peuvent être adaptées aux couleurs et au thème
+            de votre événement afin de composer un ensemble cohérent.
+          </p>
+
+          <p class="mt-5 max-w-xl text-sm leading-7 text-white/70">
+            Les possibilités dépendent des produits choisis,
+            des quantités et des disponibilités.
+          </p>
+        </div>
+      </div>
     </section>
 
-    <section>
-      <h2>Sucettes Sour++</h2>
+    <!-- EVENT PRODUCTS -->
+    <section
+      aria-labelledby="event-products-title"
+      class="px-6 py-16 sm:px-10 sm:py-20 lg:px-12"
+    >
+      <div class="mx-auto max-w-6xl">
 
-      <p>
-        Minimum :
-        {" "}
-        {sourLollipopEventPricing.minimumPerFlavour}
-        {" "}
-        pièces par saveur.
-      </p>
+        <div class="mb-12 max-w-2xl">
+          <p
+            class="mb-3 text-xs font-semibold uppercase tracking-[0.16em] text-sweety-red"
+          >
+            Formats événement
+          </p>
 
-      <p>
-        Prix :
-        {" "}
-        {sourLollipopEventPricing.standard.pricePerPiece.toFixed(2)}
-        {" "}
-        € par pièce.
-      </p>
+          <h2
+            id="event-products-title"
+            class="font-display text-3xl leading-tight sm:text-4xl"
+          >
+            Les formats à connaître.
+          </h2>
+        </div>
 
-      <p>
-        À partir de
-        {" "}
-        {sourLollipopEventPricing.bulk.minimumQuantity}
-        {" "}
-        pièces :
-        {" "}
-        {sourLollipopEventPricing.bulk.pricePerPiece.toFixed(2)}
-        {" "}
-        € par pièce.
-      </p>
+        <div class="grid gap-5 md:grid-cols-2">
+
+          <!-- MINI APPLES -->
+          <article
+            class="rounded-[1.5rem] border border-sweety-brown/15 p-6 sm:p-8"
+          >
+            <p
+              class="text-[11px] font-semibold uppercase tracking-[0.15em] text-sweety-red"
+            >
+              Événements uniquement
+            </p>
+
+            <h3 class="mt-3 font-display text-3xl">
+              Mini pommes d'amour
+            </h3>
+
+            <div class="mt-8 border-t border-sweety-brown/15 pt-6">
+              <p class="text-sm text-sweety-brown/60">
+                Quantité minimum
+              </p>
+
+              <p class="mt-2 font-display text-4xl">
+                {miniAppleEventRules.minimumQuantity}
+                <span class="ml-2 text-xl">
+                  pièces
+                </span>
+              </p>
+            </div>
+
+            <p class="mt-6 text-sm leading-7 text-sweety-brown/70">
+              Un format pensé spécialement pour les commandes événementielles.
+            </p>
+          </article>
+
+          <!-- SOUR++ -->
+          <article
+            class="rounded-[1.5rem] border border-sweety-brown/15 p-6 sm:p-8"
+          >
+            <p
+              class="text-[11px] font-semibold uppercase tracking-[0.15em] text-sweety-red"
+            >
+              Sucettes Sour++
+            </p>
+
+            <h3 class="mt-3 font-display text-3xl">
+              Colorées et acidulées.
+            </h3>
+
+            <div
+              class="mt-8 divide-y divide-sweety-brown/15 border-t border-sweety-brown/15"
+            >
+              <div
+                class="flex items-center justify-between gap-6 py-4"
+              >
+                <span class="text-sm text-sweety-brown/70">
+                  Minimum par saveur
+                </span>
+
+                <strong class="font-semibold">
+                  {sourLollipopEventPricing.minimumPerFlavour} pièces
+                </strong>
+              </div>
+
+              <div
+                class="flex items-center justify-between gap-6 py-4"
+              >
+                <span class="text-sm text-sweety-brown/70">
+                  Prix par pièce
+                </span>
+
+                <strong class="font-semibold">
+                  {sourLollipopEventPricing.standard.pricePerPiece.toFixed(2)} €
+                </strong>
+              </div>
+
+              <div
+                class="flex items-center justify-between gap-6 py-4"
+              >
+                <span class="text-sm text-sweety-brown/70">
+                  Dès {sourLollipopEventPricing.bulk.minimumQuantity} pièces
+                </span>
+
+                <strong class="font-semibold text-sweety-red">
+                  {sourLollipopEventPricing.bulk.pricePerPiece.toFixed(2)} €
+                  / pièce
+                </strong>
+              </div>
+            </div>
+          </article>
+
+        </div>
+      </div>
     </section>
 
-    <section>
-      <h2>Quand commander ?</h2>
+    <!-- LEAD TIME -->
+    <section
+      aria-labelledby="timing-title"
+      class="bg-[#F1E4D8] px-6 py-16 sm:px-10 sm:py-20 lg:px-12"
+    >
+      <div
+        class="mx-auto grid max-w-6xl gap-10 md:grid-cols-[0.85fr_1.15fr] md:items-center md:gap-16"
+      >
+        <div>
+          <p
+            class="mb-3 text-xs font-semibold uppercase tracking-[0.16em] text-sweety-red"
+          >
+            Anticiper votre commande
+          </p>
 
-      <p>
-        Prévoyez environ
-        {" "}
-        {orderingRules.notice.eventOrderWeeks.min}
-        {" "}
-        à
-        {" "}
-        {orderingRules.notice.eventOrderWeeks.max}
-        {" "}
-        semaines à l'avance.
-      </p>
+          <h2
+            id="timing-title"
+            class="max-w-md font-display text-3xl leading-tight sm:text-4xl"
+          >
+            Prévoyez votre événement à l'avance.
+          </h2>
+        </div>
+
+        <div>
+          <p
+            class="font-display text-[clamp(3rem,6vw,5rem)] leading-none"
+          >
+            {orderingRules.notice.eventOrderWeeks.min}
+            {" à "}
+            {orderingRules.notice.eventOrderWeeks.max}
+            {" semaines"}
+          </p>
+
+          <p
+            class="mt-5 max-w-lg text-sm leading-7 text-sweety-brown/75 sm:text-base"
+          >
+            C'est le délai minimum à prévoir pour une commande événementielle.
+            Plus votre projet est important ou personnalisé, mieux vaut
+            anticiper votre demande.
+          </p>
+        </div>
+      </div>
     </section>
 
-    <a href="/commander/">
-      Demander une commande
-    </a>
+    <!-- FINAL CTA -->
+    <section
+      aria-labelledby="event-cta-title"
+      class="bg-sweety-brown px-6 py-16 text-sweety-cream sm:px-10 sm:py-20 lg:px-12"
+    >
+      <div
+        class="mx-auto flex max-w-6xl flex-col gap-8 md:flex-row md:items-end md:justify-between"
+      >
+        <div>
+          <p
+            class="mb-3 text-xs font-semibold uppercase tracking-[0.16em] text-[#FFB4AE]"
+          >
+            Votre événement
+          </p>
+
+          <h2
+            id="event-cta-title"
+            class="max-w-2xl font-display text-3xl leading-tight text-sweety-cream sm:text-4xl"
+          >
+            Parlez-nous de votre idée.
+          </h2>
+
+          <p
+            class="mt-4 max-w-xl text-sm leading-7 text-sweety-cream/70 sm:text-base"
+          >
+            Indiquez la date, les quantités souhaitées et l'univers
+            de votre événement pour préparer votre demande.
+          </p>
+        </div>
+
+        <a
+          href={siteConfig.instagram.url}
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="Commander pour un événement chez Sweety Apple via Instagram"
+          class="inline-flex min-h-12 shrink-0 items-center justify-center gap-2 rounded-full bg-sweety-red px-7 py-3 text-sm font-semibold text-white transition-colors hover:bg-white hover:text-sweety-brown focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white"
+        >
+          Commander
+
+          <svg
+            viewBox="0 0 16 16"
+            fill="none"
+            aria-hidden="true"
+            class="h-4 w-4"
+          >
+            <path
+              d="M4.25 11.75 11.75 4.25M6 4.25h5.75V10"
+              stroke="currentColor"
+              stroke-width="1.5"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            />
+          </svg>
+        </a>
+      </div>
+    </section>
+
   </main>
 </BaseLayout>

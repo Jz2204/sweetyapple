@@ -1,17 +1,208 @@
-<header class="sticky top-0 z-50 w-full bg-sweety-cream/95 backdrop-blur-md border-b border-sweety-brown/5">
-  <nav aria-label="Navigation principale" class="max-w-[1600px] mx-auto flex flex-wrap items-center justify-between px-6 sm:px-12 xl:px-24 py-5 w-full gap-4">
-    <a href="/" aria-label="Sweety Apple — Accueil" class="font-display text-2xl md:text-3xl font-semibold text-sweety-brown tracking-tight hover:opacity-80 transition-opacity">
-      Sweety Apple
+---
+import { siteConfig } from "../../config/site";
+---
+
+<header
+  class="sticky top-0 z-50 w-full border-b border-sweety-brown/10 bg-sweety-cream/95 backdrop-blur-md"
+>
+  <nav
+    aria-label="Navigation principale"
+    class="relative mx-auto flex w-full max-w-7xl items-center justify-between gap-4 px-6 py-4 sm:px-10 lg:px-12"
+  >
+    <!-- BRAND -->
+    <a
+      href="/"
+      aria-label="Sweety Apple — Accueil"
+      class="shrink-0 font-display text-2xl font-semibold tracking-tight text-sweety-brown transition-opacity hover:opacity-70 md:text-3xl"
+    >
+      {siteConfig.siteName}
     </a>
 
-    <ul class="flex flex-wrap items-center gap-4 md:gap-8 text-sm md:text-base font-medium text-sweety-brown/80">
-      <li class="hidden md:block"><a href="/produits/" class="hover:text-sweety-red transition-colors">Produits</a></li>
-      <li class="hidden md:block"><a href="/saveurs/" class="hover:text-sweety-red transition-colors">Saveurs</a></li>
-      <li class="hidden md:block"><a href="/evenements/" class="hover:text-sweety-red transition-colors">Événements</a></li>
-      <li class="hidden md:block"><a href="/faq/" class="hover:text-sweety-red transition-colors">FAQ</a></li>
+    <!-- MOBILE ACTIONS -->
+    <div class="flex items-center gap-2 md:hidden">
+      <a
+        href={siteConfig.instagram.url}
+        target="_blank"
+        rel="noopener noreferrer"
+        aria-label="Contacter Sweety Apple sur Instagram"
+        class="inline-flex min-h-11 items-center justify-center gap-1.5 rounded-full bg-sweety-red px-4 text-sm font-semibold text-white transition-colors hover:bg-sweety-brown focus-visible:outline-2 focus-visible:outline-offset-3 focus-visible:outline-sweety-red"
+      >
+        Instagram
+
+        <svg
+          viewBox="0 0 16 16"
+          fill="none"
+          aria-hidden="true"
+          class="h-3.5 w-3.5"
+        >
+          <path
+            d="M4.25 11.75 11.75 4.25M6 4.25h5.75V10"
+            stroke="currentColor"
+            stroke-width="1.5"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          />
+        </svg>
+      </a>
+
+      <!-- MOBILE MENU -->
+      <details class="group">
+        <summary
+          class="flex min-h-11 cursor-pointer list-none items-center justify-center rounded-full border border-sweety-brown/20 px-4 text-sm font-semibold text-sweety-brown transition-colors hover:bg-white focus-visible:outline-2 focus-visible:outline-offset-3 focus-visible:outline-sweety-brown [&::-webkit-details-marker]:hidden"
+        >
+          Menu
+        </summary>
+
+        <div
+          class="absolute left-0 top-full mt-px w-full border-b border-sweety-brown/10 bg-sweety-cream px-6 pb-6 pt-4 shadow-lg md:hidden"
+        >
+          <ul class="mx-auto flex max-w-7xl flex-col">
+            <li>
+              <a
+                href="/produits/"
+                class="flex min-h-12 items-center border-b border-sweety-brown/10 py-3 text-base font-medium transition-colors hover:text-sweety-red"
+              >
+                Produits
+              </a>
+            </li>
+
+            <li>
+              <a
+                href="/saveurs/"
+                class="flex min-h-12 items-center border-b border-sweety-brown/10 py-3 text-base font-medium transition-colors hover:text-sweety-red"
+              >
+                Saveurs
+              </a>
+            </li>
+
+            <li>
+              <a
+                href="/evenements/"
+                class="flex min-h-12 items-center border-b border-sweety-brown/10 py-3 text-base font-medium transition-colors hover:text-sweety-red"
+              >
+                Événements
+              </a>
+            </li>
+
+            <li>
+              <a
+                href="/commander/"
+                class="flex min-h-12 items-center border-b border-sweety-brown/10 py-3 text-base font-medium transition-colors hover:text-sweety-red"
+              >
+                Commander
+              </a>
+            </li>
+
+            <li>
+              <a
+                href="/faq/"
+                class="flex min-h-12 items-center py-3 text-base font-medium transition-colors hover:text-sweety-red"
+              >
+                FAQ
+              </a>
+            </li>
+          </ul>
+
+          <a
+            href={siteConfig.instagram.url}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="mt-5 flex min-h-12 w-full items-center justify-between rounded-full bg-sweety-red px-6 text-sm font-semibold text-white transition-colors hover:bg-sweety-brown"
+          >
+            <span>Écrire sur Instagram</span>
+
+            <svg
+              viewBox="0 0 16 16"
+              fill="none"
+              aria-hidden="true"
+              class="h-4 w-4"
+            >
+              <path
+                d="M4.25 11.75 11.75 4.25M6 4.25h5.75V10"
+                stroke="currentColor"
+                stroke-width="1.5"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              />
+            </svg>
+          </a>
+        </div>
+      </details>
+    </div>
+
+    <!-- DESKTOP NAV -->
+    <ul
+      class="hidden items-center gap-7 text-sm font-medium text-sweety-brown/80 md:flex lg:gap-8"
+    >
       <li>
-        <a href="/commander/" class="inline-flex justify-center items-center px-6 md:px-7 py-2.5 bg-sweety-red text-white font-medium rounded-full hover:bg-sweety-brown transition-colors duration-300 shadow-sm">
+        <a
+          href="/produits/"
+          class="transition-colors hover:text-sweety-red"
+        >
+          Produits
+        </a>
+      </li>
+
+      <li>
+        <a
+          href="/saveurs/"
+          class="transition-colors hover:text-sweety-red"
+        >
+          Saveurs
+        </a>
+      </li>
+
+      <li>
+        <a
+          href="/evenements/"
+          class="transition-colors hover:text-sweety-red"
+        >
+          Événements
+        </a>
+      </li>
+
+      <li>
+        <a
+          href="/commander/"
+          class="transition-colors hover:text-sweety-red"
+        >
           Commander
+        </a>
+      </li>
+
+      <li>
+        <a
+          href="/faq/"
+          class="transition-colors hover:text-sweety-red"
+        >
+          FAQ
+        </a>
+      </li>
+
+      <li class="ml-1">
+        <a
+          href={siteConfig.instagram.url}
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="Contacter Sweety Apple sur Instagram"
+          class="inline-flex min-h-11 items-center justify-center gap-2 rounded-full bg-sweety-red px-6 font-semibold text-white transition-colors hover:bg-sweety-brown focus-visible:outline-2 focus-visible:outline-offset-3 focus-visible:outline-sweety-red"
+        >
+          Commander
+
+          <svg
+            viewBox="0 0 16 16"
+            fill="none"
+            aria-hidden="true"
+            class="h-4 w-4"
+          >
+            <path
+              d="M4.25 11.75 11.75 4.25M6 4.25h5.75V10"
+              stroke="currentColor"
+              stroke-width="1.5"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            />
+          </svg>
         </a>
       </li>
     </ul>
