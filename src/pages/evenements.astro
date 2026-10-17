@@ -11,6 +11,12 @@ import {
   miniAppleEventRules,
   sourLollipopEventPricing,
 } from "../data/ordering";
+
+const formatPrice = (value: number) =>
+  new Intl.NumberFormat("fr-BE", {
+    style: "currency",
+    currency: "EUR",
+  }).format(value);
 ---
 
 <BaseLayout
@@ -196,7 +202,9 @@ import {
             de votre événement afin de composer un ensemble cohérent.
           </p>
 
-          <p class="mt-5 max-w-xl text-sm leading-7 text-white/70">
+          <p
+            class="mt-5 max-w-xl text-sm leading-7 text-white/70"
+          >
             Les possibilités dépendent des produits choisis,
             des quantités et des disponibilités.
           </p>
@@ -242,20 +250,25 @@ import {
               Mini pommes d'amour
             </h3>
 
-            <div class="mt-8 border-t border-sweety-brown/15 pt-6">
+            <div
+              class="mt-8 border-t border-sweety-brown/15 pt-6"
+            >
               <p class="text-sm text-sweety-brown/60">
                 Quantité minimum
               </p>
 
               <p class="mt-2 font-display text-4xl">
                 {miniAppleEventRules.minimumQuantity}
+
                 <span class="ml-2 text-xl">
                   pièces
                 </span>
               </p>
             </div>
 
-            <p class="mt-6 text-sm leading-7 text-sweety-brown/70">
+            <p
+              class="mt-6 text-sm leading-7 text-sweety-brown/70"
+            >
               Un format pensé spécialement pour les commandes événementielles.
             </p>
           </article>
@@ -297,7 +310,9 @@ import {
                 </span>
 
                 <strong class="font-semibold">
-                  {sourLollipopEventPricing.standard.pricePerPiece.toFixed(2)} €
+                  {formatPrice(
+                    sourLollipopEventPricing.standard.pricePerPiece
+                  )}
                 </strong>
               </div>
 
@@ -309,8 +324,10 @@ import {
                 </span>
 
                 <strong class="font-semibold text-sweety-red">
-                  {sourLollipopEventPricing.bulk.pricePerPiece.toFixed(2)} €
-                  / pièce
+                  {formatPrice(
+                    sourLollipopEventPricing.bulk.pricePerPiece
+                  )}
+                  {" / pièce"}
                 </strong>
               </div>
             </div>
