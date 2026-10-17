@@ -36,6 +36,41 @@ const imageURL = image
     ? new URL(image, Astro.site).toString()
     : image
   : undefined;
+
+const siteURL = Astro.site
+  ? Astro.site.toString().replace(/\/$/, "")
+  : undefined;
+
+const structuredData = siteURL
+  ? {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "Organization",
+          "@id": `${siteURL}/#organization`,
+          name: siteConfig.siteName,
+          url: siteURL,
+          sameAs: [
+            siteConfig.instagram.url,
+          ],
+          areaServed: {
+            "@type": "City",
+            name: "Bruxelles",
+          },
+        },
+        {
+          "@type": "WebSite",
+          "@id": `${siteURL}/#website`,
+          url: siteURL,
+          name: siteConfig.siteName,
+          inLanguage: siteConfig.locale,
+          publisher: {
+            "@id": `${siteURL}/#organization`,
+          },
+        },
+      ],
+    }
+  : undefined;
 ---
 
 <!doctype html>
@@ -53,13 +88,16 @@ const imageURL = image
       content="#FAF7F2"
     />
 
-    <link rel="sitemap" href="/sitemap-index.xml" />
-
     <title>{title}</title>
 
     <meta
       name="description"
       content={description}
+    />
+
+    <link
+      rel="sitemap"
+      href="/sitemap-index.xml"
     />
 
     {
@@ -160,6 +198,16 @@ const imageURL = image
             content={imageAlt}
           />
         </>
+      )
+    }
+
+    <!-- Structured data -->
+    {
+      structuredData && (
+        <script
+          type="application/ld+json"
+          set:html={JSON.stringify(structuredData)}
+        />
       )
     }
   </head>
