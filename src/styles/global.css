@@ -1,27 +1,33 @@
-@import url('https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;500;600&family=Fraunces:opsz,wght@9..144,400;500;600;700&display=swap');
-
 @import "tailwindcss";
 
 @theme {
-  --color-sweety-cream: #FAF7F2; 
-  --color-sweety-brown: #3A2618; /* Rich chocolate brown for text */
-  --color-sweety-red: #D62323;   /* Candy apple red */
-  
-  --font-display: "Fraunces", serif;
-  --font-body: "DM Sans", sans-serif;
+  --color-sweety-cream: #FAF7F2;
+  --color-sweety-brown: #3A2618;
+  --color-sweety-red: #D62323;
+
+  --font-display: "Fraunces Variable", serif;
+  --font-body: "DM Sans Variable", sans-serif;
 }
 
 @layer base {
   body {
     @apply bg-sweety-cream text-sweety-brown font-body antialiased;
   }
-  
-  h1, h2, h3, h4, h5, h6 {
-    @apply font-display text-sweety-brown tracking-tight;
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    @apply font-display tracking-tight;
+    color: inherit;
   }
-  
+
   @media (prefers-reduced-motion: reduce) {
-    *, ::before, ::after {
+    *,
+    ::before,
+    ::after {
       animation-delay: -1ms !important;
       animation-duration: 1ms !important;
       animation-iteration-count: 1 !important;
